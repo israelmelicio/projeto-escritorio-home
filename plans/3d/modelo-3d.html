@@ -27,6 +27,7 @@
     <button id="bA">OPÇÃO A</button>
     <button id="bB" class="on">OPÇÃO B</button>
     <button id="bC">OPÇÃO C</button>
+    <button id="bD">OPÇÃO D</button>
   </div>
   <div id="desc"></div>
 </header>
@@ -1203,6 +1204,8 @@ const M = {
   navyLt: new THREE.MeshStandardMaterial({color:0x3d5175, roughness:0.85}),
   glass : new THREE.MeshStandardMaterial({color:0x9fc4e0, roughness:0.1, transparent:true, opacity:0.32}),
   leath : new THREE.MeshStandardMaterial({color:0x3e1f0d, roughness:0.72}),
+  slate : new THREE.MeshStandardMaterial({color:0x39434f, roughness:0.7}),
+  fendi : new THREE.MeshStandardMaterial({color:0x7d7568, roughness:0.6}),
 };
 
 // box helper: corner (x,z), width along x, depth along z, height h, base y0
@@ -1373,24 +1376,66 @@ function optionC(){
   return g;
 }
 
+function optionD(){
+  const g = new THREE.Group();
+  // parede arcade D: torre 75 + displays 140 + torre 80 (h200)
+  B(g, 0, 0, 0.75, 0.35, 2.00, 0, M.wood);
+  for(let r=0;r<8;r++) nichePlate(g, 0.04, 0.16+r*0.226, 0.67, 0.185, 0.351);
+  B(g, 0.75, 0, 1.40, 0.50, 0.50, 0, M.wood);
+  [[0.80,0.04],[1.50,0.04],[0.80,0.265],[1.50,0.265]].forEach(p=>B(g,p[0],0.501,0.65,0.004,0.19,p[1],M.woodDk));
+  B(g, 0.75, 0, 1.40, 0.50, 0.02, 0.50, M.darkTop);
+  crt(g, 0.81); lgMonitor(g, 1.46, 0.52, 0.14);
+  B(g, 0.75, 0, 1.40, 0.50, 0.80, 1.24, M.wood);
+  for(let c=0;c<3;c++) for(let r=0;r<2;r++) nichePlate(g, 0.80+c*0.455, 1.29+r*0.375, 0.42, 0.33, 0.501);
+  B(g, 2.15, 0, 0.80, 0.35, 2.00, 0, M.wood);
+  for(let r=0;r<8;r++) nichePlate(g, 2.195, 0.16+r*0.226, 0.71, 0.185, 0.351);
+  // credenza baixa em L no canto norte (restrição da janela: h≤120)
+  B(g, 2.95, 0, 0.60, 0.40, 1.15, 0, M.wood);
+  B(g, 3.15, 0.40, 0.40, 0.85, 1.15, 0, M.wood);
+  nichePlate(g, 3.00, 0.20, 0.50, 0.35, 0.401);
+  nichePlate(g, 3.00, 0.62, 0.50, 0.35, 0.401);
+  B(g, 3.146, 0.50, 0.006, 0.70, 0.35, 0.20, M.voidDk);
+  B(g, 3.146, 0.50, 0.006, 0.70, 0.35, 0.62, M.voidDk);
+  B(g, 3.22, 0.55, 0.092, 0.26, 0.39, 1.15, M.white);   // PS5 vertical no topo
+  B(g, 3.22, 0.95, 0.15, 0.15, 0.30, 1.15, M.black);    // Series X
+  // vitrine de mídias (igual à B)
+  vitrineB(g);
+  // MÓVEIS ATUAIS mantidos
+  B(g, 2.95, 1.25, 0.60, 1.45, 0.04, 0.78, M.slate);    // tampo NE 145×60
+  B(g, 2.52, 2.29, 1.03, 0.41, 0.04, 0.78, M.slate);    // tampo SE 103×41
+  B(g, 2.96, 1.26, 0.56, 0.04, 0.78, 0, M.slate);      // pé do tampo NE — lado da janela, junto à credenza
+  B(g, 2.54, 2.31, 0.04, 0.37, 0.78, 0, M.slate);      // pé do tampo SE — extremidade oeste
+  B(g, 3.30, 1.55, 0.04, 0.62, 0.43, 0.94, M.screen);   // Studio Display
+  B(g, 3.34, 1.80, 0.16, 0.12, 0.14, 0.80, M.metal);
+  B(g, 1.34, 2.30, 1.18, 0.40, 2.46, 0, M.slate);       // estante atual 118×246
+  for(let r=0;r<3;r++) B(g, 1.39, 2.292, 1.08, 0.006, 0.34, 1.32+r*0.38, M.voidDk);
+  B(g, 1.39, 2.292, 1.08, 0.006, 0.36, 0.84, M.voidDk); // nicho de exposição
+  B(g, 1.39, 2.292, 1.08, 0.006, 0.74, 0.06, M.fendi);  // portas inferiores
+  chair(g, 2.55, 1.95, -Math.PI/2);
+  pufe(g);
+  return g;
+}
+
 // ---------- option switching ----------
 const DESCS = {
   A: "Parede arcade (30 nichos + CRT + LG) · biblioteca completa até o teto · compartimento oculto 35×35×200 no canto (porta de toque, p/ fontes, cabos e controles reserva) · bancada dev 250 encostada na parede da janela.",
   B: "Parede arcade (38 nichos + CRT + LG, torre esquerda inteira de 110) · vitrine de mídias 107×15 (~8 m lineares), com respiro de 30 p/ a torre · prateleira p/ 10 livros · bancada dev 250 na sudeste, encostada na parede da janela.",
-  C: "Sem coleção: credenza com LG + Series X, PS5 e Switch · biblioteca completa · bancada dev na parede da janela inteira (270) · sofá-cama Gênova 127×91 (abre p/ cama de casal 191 — cabe com folga de 34)."
+  C: "Sem coleção: credenza com LG + Series X, PS5 e Switch · biblioteca completa · bancada dev na parede da janela inteira (270) · sofá-cama Gênova 127×91 (abre p/ cama de casal 191 — cabe com folga de 34).",
+  D: "Mesa em L e estante ATUAIS mantidas · parede arcade nova (torres 75+80 h200 + CRT + LG + ponte) · canto da janela: credenza baixa h115 (nada acima de 120 perto da janela) · vitrine de mídias 107×15."
 };
-const builders = {A: optionA, B: optionB, C: optionC};
+const builders = {A: optionA, B: optionB, C: optionC, D: optionD};
 let current = null;
 function show(opt){
   if(current){ scene.remove(current); }
   current = builders[opt]();
   scene.add(current);
   document.getElementById('desc').textContent = DESCS[opt];
-  ['bA','bB','bC'].forEach(id=>document.getElementById(id).classList.toggle('on', id === 'b'+opt));
+  ['bA','bB','bC','bD'].forEach(id=>document.getElementById(id).classList.toggle('on', id === 'b'+opt));
 }
 document.getElementById('bA').addEventListener('click', ()=>show('A'));
 document.getElementById('bB').addEventListener('click', ()=>show('B'));
 document.getElementById('bC').addEventListener('click', ()=>show('C'));
+document.getElementById('bD').addEventListener('click', ()=>show('D'));
 show('B');
 
 // ---------- render loop (walls auto-hide) ----------
