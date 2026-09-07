@@ -1,0 +1,302 @@
+<meta charset="utf-8">
+<title>Modelo 3D — Sala Dev & Coleção</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  html,body{height:100%;}
+  body{margin:0; background:#171512; color:#EDE8DF; font-family:"IBM Plex Sans",system-ui,sans-serif; overflow:hidden;}
+  #app{position:fixed; inset:0;}
+  canvas{display:block;}
+  header{position:fixed; top:0; left:0; right:0; z-index:10; display:flex; flex-wrap:wrap; align-items:center;
+    gap:10px 18px; padding:14px 18px; background:linear-gradient(#171512f2,#17151200); pointer-events:none;}
+  h1{font-family:Archivo,sans-serif; font-weight:800; font-size:18px; margin:0; letter-spacing:.01em;}
+  .btns{display:flex; gap:8px; pointer-events:auto;}
+  .btns button{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500; letter-spacing:.05em;
+    color:#EDE8DF; background:#26221c; border:1px solid #4a4438; border-radius:6px; padding:7px 14px; cursor:pointer;}
+  .btns button:hover{border-color:#8a7a5e;}
+  .btns button.on{background:#C9A070; color:#1c1812; border-color:#C9A070;}
+  .btns button:focus-visible{outline:2px solid #7DA5E8; outline-offset:2px;}
+  #desc{font-size:12.5px; color:#A39B8D; max-width:560px; line-height:1.4;}
+  footer{position:fixed; bottom:0; left:0; right:0; z-index:10; display:flex; justify-content:space-between;
+    gap:16px; padding:12px 18px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:#8a8272;
+    background:linear-gradient(#17151200,#171512e6); pointer-events:none;}
+</style>
+<div id="app"></div>
+<header>
+  <h1>Sala Dev &amp; Coleção — 3D</h1>
+  <div class="btns">
+    <button id="bA">OPÇÃO A</button>
+    <button id="bB" class="on">OPÇÃO B</button>
+    <button id="bC">OPÇÃO C</button>
+  </div>
+  <div id="desc"></div>
+</header>
+<footer>
+  <span>arraste = girar · scroll = zoom · botão direito = mover · paredes somem conforme o ângulo</span>
+  <span>3,55 × 2,70 × 2,64 m · medidas reais</span>
+</footer>
+<script src="three.min.js"></script>
+<script src="OrbitControls.js"></script>
+<script>
+(function(){
+'use strict';
+// ---------- setup ----------
+const app = document.getElementById('app');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x171512);
+const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.05, 60);
+camera.position.set(6.2, 3.7, 5.8);
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputEncoding = THREE.sRGBEncoding;
+app.appendChild(renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(1.775, 0.85, 1.35);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.minDistance = 1.0;
+controls.maxDistance = 14;
+controls.maxPolarAngle = Math.PI * 0.495;
+
+// ---------- lights ----------
+scene.add(new THREE.HemisphereLight(0xfff2dd, 0x3a332a, 0.85));
+const sun = new THREE.DirectionalLight(0xffe9c8, 0.9);
+sun.position.set(5.5, 6.5, 4.5);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.left = -4; sun.shadow.camera.right = 5;
+sun.shadow.camera.top = 5;  sun.shadow.camera.bottom = -4;
+scene.add(sun);
+const warm = new THREE.PointLight(0xffdcae, 0.35, 8);
+warm.position.set(1.8, 2.45, 1.35);
+scene.add(warm);
+
+// ---------- materials ----------
+const M = {
+  floor : new THREE.MeshStandardMaterial({color:0x8d6f4e, roughness:0.75}),
+  wall  : new THREE.MeshStandardMaterial({color:0xe6e1d6, roughness:0.95}),
+  wallNW: new THREE.MeshStandardMaterial({color:0xafc2cd, roughness:0.95}),
+  wood  : new THREE.MeshStandardMaterial({color:0x8a6a48, roughness:0.6}),
+  woodDk: new THREE.MeshStandardMaterial({color:0x6b5138, roughness:0.6}),
+  voidDk: new THREE.MeshStandardMaterial({color:0x241e16, roughness:0.9}),
+  lacq  : new THREE.MeshStandardMaterial({color:0xf1ede4, roughness:0.4}),
+  darkTop:new THREE.MeshStandardMaterial({color:0x453b31, roughness:0.55}),
+  metal : new THREE.MeshStandardMaterial({color:0xcfd2d6, roughness:0.35, metalness:0.6}),
+  screen: new THREE.MeshStandardMaterial({color:0x0e1218, roughness:0.25}),
+  device: new THREE.MeshStandardMaterial({color:0x36363a, roughness:0.5}),
+  white : new THREE.MeshStandardMaterial({color:0xf6f4ef, roughness:0.45}),
+  black : new THREE.MeshStandardMaterial({color:0x1c1c1f, roughness:0.5}),
+  navy  : new THREE.MeshStandardMaterial({color:0x2e3d59, roughness:0.85}),
+  navyLt: new THREE.MeshStandardMaterial({color:0x3d5175, roughness:0.85}),
+  glass : new THREE.MeshStandardMaterial({color:0x9fc4e0, roughness:0.1, transparent:true, opacity:0.32}),
+  leath : new THREE.MeshStandardMaterial({color:0x3e1f0d, roughness:0.72}),
+};
+
+// box helper: corner (x,z), width along x, depth along z, height h, base y0
+function B(g, x, z, w, d, h, y0, mat){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  m.position.set(x + w/2, y0 + h/2, z + d/2);
+  m.castShadow = true; m.receiveShadow = true;
+  g.add(m); return m;
+}
+
+// ---------- room shell ----------
+const W = 3.55, D = 2.70, H = 2.64, T = 0.06;
+const shell = new THREE.Group(); scene.add(shell);
+const floor = B(shell, -T, -T, W+2*T, D+2*T, T, -T, M.floor); floor.receiveShadow = true;
+
+const gNW = new THREE.Group(), gSE = new THREE.Group(), gSW = new THREE.Group(), gNE = new THREE.Group();
+[gNW,gSE,gSW,gNE].forEach(g=>scene.add(g));
+B(gNW, -T, -T, W+2*T, T, H, 0, M.wallNW);                 // NW wall (accent, AC)
+B(gSE, -T, D, W+2*T, T, H, 0, M.wall);                    // SE wall
+B(gSW, -T, 0, T, D, H, 0, M.wall);                        // SW wall (door)
+// NE wall with window opening (z 0.03–1.23, y 1.06–2.26)
+B(gNE, W, 0, T, 0.03, H, 0, M.wall);
+B(gNE, W, 1.23, T, D-1.23, H, 0, M.wall);
+B(gNE, W, 0.03, T, 1.20, 1.06, 0, M.wall);
+B(gNE, W, 0.03, T, 1.20, H-2.26, 2.26, M.wall);
+B(gNE, W+0.01, 0.03, 0.02, 1.20, 1.20, 1.06, M.glass);    // window glass
+// door (SW wall, z 1.74–2.58, h 2.16) + handle
+B(gSW, 0, 1.74, T+0.015, 0.84, 2.16, 0, M.lacq);
+B(gSW, T+0.01, 2.44, 0.03, 0.03, 0.14, 1.00, M.device);
+// AC split on NW wall: x 1.32–2.07, y 2.19–2.49, depth 0.28
+B(gNW, 1.32, 0, 0.75, 0.28, 0.30, 2.19, M.white);
+
+// ---------- furniture builders ----------
+function nichePlate(g, x, y0, w, h, z){ // dark plate on a +z-facing front
+  B(g, x, z, w, 0.004, h, y0, M.voidDk);
+}
+function nichePlateX(g, z, y0, d, h, x){ // dark plate on a +x-facing front
+  B(g, x, z, 0.004, d, h, y0, M.voidDk);
+}
+function crt(g, x){ // CRT on display surface, front toward +z
+  B(g, x, 0.06, 0.57, 0.36, 0.48, 0.52, M.device);
+  B(g, x+0.045, 0.418, 0.48, 0.006, 0.36, 0.585, M.screen);
+}
+function lgMonitor(g, x, y0, z){ // LG 27" on stand
+  B(g, x+0.19, z, 0.24, 0.16, 0.02, y0, M.black);
+  B(g, x+0.28, z+0.05, 0.05, 0.04, 0.10, y0+0.02, M.black);
+  B(g, x, z+0.10, 0.61, 0.035, 0.43, y0+0.10, M.screen);
+}
+function arcadeWall(g, fullLeftTower){ // towers + display section + bridge (options A & B)
+  if(fullLeftTower){
+    // left tower 110 to the corner, h200, 2×8 = 16 niches (option B)
+    B(g, 0, 0, 1.10, 0.35, 2.00, 0, M.wood);
+    for(let c=0;c<2;c++) for(let r=0;r<8;r++) nichePlate(g, 0.045+c*0.53, 0.16+r*0.226, 0.46, 0.185, 0.351);
+  }else{
+    // left tower 75, recessed 35 from SW corner, h200, 8 niches (option A)
+    B(g, 0.35, 0, 0.75, 0.35, 2.00, 0, M.wood);
+    for(let r=0;r<8;r++) nichePlate(g, 0.39, 0.16+r*0.226, 0.67, 0.185, 0.351);
+  }
+  // display base h50 + drawers
+  B(g, 1.10, 0, 1.40, 0.50, 0.50, 0, M.wood);
+  [[1.15,0.04],[1.85,0.04],[1.15,0.265],[1.85,0.265]].forEach(p=>B(g,p[0],0.501,0.65,0.004,0.19,p[1],M.woodDk));
+  B(g, 1.10, 0, 1.40, 0.50, 0.02, 0.50, M.darkTop);
+  crt(g, 1.16); lgMonitor(g, 1.81, 0.52, 0.14);
+  // bridge with 6 niches (y 1.24–2.04)
+  B(g, 1.10, 0, 1.40, 0.50, 0.80, 1.24, M.wood);
+  for(let c=0;c<3;c++) for(let r=0;r<2;r++) nichePlate(g, 1.15+c*0.455, 1.29+r*0.375, 0.42, 0.33, 0.501);
+  // right tower 105, h200, 2×8 niches
+  B(g, 2.50, 0, 1.05, 0.35, 2.00, 0, M.wood);
+  for(let c=0;c<2;c++) for(let r=0;r<8;r++) nichePlate(g, 2.545+c*0.50, 0.16+r*0.226, 0.46, 0.185, 0.351);
+  // PS5 + Series X verticais no topo da torre direita
+  B(g, 2.62, 0.10, 0.092, 0.26, 0.39, 2.00, M.white);
+  B(g, 3.10, 0.10, 0.15, 0.15, 0.30, 2.00, M.black);
+}
+function devBenchSE(g){ // bench 250×70 on SE wall (options A & B)
+  B(g, 1.05, 2.00, 2.50, 0.70, 0.04, 0.72, M.darkTop); // 250×70, encostada na parede NE
+  B(g, 1.07, 2.03, 0.04, 0.64, 0.72, 0, M.darkTop);
+  B(g, 3.49, 2.03, 0.04, 0.64, 0.72, 0, M.darkTop);
+  B(g, 3.02, 2.06, 0.45, 0.60, 0.60, 0, M.wood);       // gaveteiro
+  B(g, 1.55, 2.52, 0.62, 0.04, 0.43, 0.90, M.screen);  // Studio Display
+  B(g, 1.80, 2.56, 0.12, 0.16, 0.14, 0.76, M.metal);
+  B(g, 2.30, 2.30, 0.32, 0.24, 0.025, 0.76, M.metal);  // MacBook no suporte
+  chair(g, 2.00, 1.52, Math.PI);
+}
+function chair(g, x, z, rot){ // cadeira gamer: base estrela, coluna, assento, encosto e apoios
+  const c = new THREE.Group();
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.29, 0.31, 0.035, 20), M.black);
+  base.position.y = 0.03; base.castShadow = base.receiveShadow = true; c.add(base);
+  const col = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.042, 0.34, 12), M.black);
+  col.position.y = 0.22; col.castShadow = true; c.add(col);
+  B(c, -0.235, -0.225, 0.47, 0.45, 0.11, 0.40, M.leath);   // assento
+  B(c, -0.215, 0.155, 0.43, 0.085, 0.62, 0.49, M.leath);   // encosto
+  B(c, -0.15, 0.165, 0.30, 0.075, 0.15, 1.13, M.leath);    // apoio de cabeça
+  B(c, -0.285, -0.12, 0.055, 0.26, 0.05, 0.62, M.black);   // apoio de braço E
+  B(c, 0.23, -0.12, 0.055, 0.26, 0.05, 0.62, M.black);     // apoio de braço D
+  B(c, -0.285, -0.02, 0.055, 0.045, 0.20, 0.44, M.black);
+  B(c, 0.23, -0.02, 0.055, 0.045, 0.20, 0.44, M.black);
+  c.position.set(x, 0, z); c.rotation.y = rot;
+  g.add(c);
+}
+function pufe(g){ // pufe redondo estofado
+  const p = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.35, 0.36, 24), M.navy);
+  p.position.set(1.50, 0.18, 1.15); p.castShadow = p.receiveShadow = true; g.add(p);
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(0.335, 0.335, 0.09, 24), M.navyLt);
+  t.position.set(1.50, 0.40, 1.15); t.castShadow = true; g.add(t);
+}
+function bibliotecaA(g){ // full height, to the corner, notch where it meets the tower
+  B(g, 0, 0.35, 0.35, 1.37, 2.50, 0, M.woodDk);              // main run (z .35–1.72)
+  B(g, 0, 0, 0.35, 0.35, 0.50, 2.00, M.woodDk);              // corner top section (200–250)
+  B(g, 0, 0, 0.35, 0.35, 2.00, 0, M.woodDk);                 // compartimento oculto 35×35×200
+  B(g, 0.025, 0.352, 0.30, 0.006, 1.90, 0.05, M.wood);       // porta de toque (painel disfarçado, frente p/ a torre)
+  for(let r=0;r<6;r++) nichePlateX(g, 0.40, 0.20+r*0.375, 1.27, 0.31, 0.351);
+  nichePlateX(g, 0.03, 2.09, 1.64, 0.33, 0.351);             // long top shelf across the corner
+}
+function vitrineB(g){ // media showcase 107×15 h200, 30 cm gap after the full left tower
+  B(g, 0, 0.65, 0.15, 1.07, 2.00, 0, M.woodDk);
+  for(let r=0;r<8;r++) nichePlateX(g, 0.70, 0.17+r*0.215, 0.97, 0.175, 0.151);
+}
+function armchair(g, x, z){ // poltrona 80×75, frente p/ -z
+  const a = new THREE.Group();
+  B(a, 0, 0, 0.80, 0.75, 0.34, 0, M.navy);
+  B(a, 0.14, 0.08, 0.52, 0.56, 0.10, 0.34, M.navyLt);
+  B(a, 0, 0.55, 0.80, 0.20, 0.72, 0.10, M.navy);
+  B(a, 0, 0, 0.13, 0.70, 0.58, 0, M.navy);
+  B(a, 0.67, 0, 0.13, 0.70, 0.58, 0, M.navy);
+  a.position.set(x, 0, z); g.add(a);
+}
+function optionA(){
+  const g = new THREE.Group();
+  arcadeWall(g, false); bibliotecaA(g); devBenchSE(g); pufe(g);
+  return g;
+}
+function optionB(){
+  const g = new THREE.Group();
+  arcadeWall(g, true); vitrineB(g); devBenchSE(g); pufe(g);
+  // prateleira 90 p/ ~10 livros sobre a bancada
+  B(g, 1.30, 2.55, 0.90, 0.15, 0.035, 1.30, M.woodDk);
+  const bookCols = [0xB05A3C, 0x3E5C76, 0x7A8450, 0xC9A227, 0x5C4B6B];
+  for(let i=0;i<9;i++) B(g, 1.36+i*0.075, 2.575, 0.05, 0.11, 0.20+(i%3)*0.02, 1.335,
+    new THREE.MeshStandardMaterial({color:bookCols[i%5], roughness:0.8}));
+  return g;
+}
+function optionC(){
+  const g = new THREE.Group();
+  // credenza game na parede NW
+  B(g, 1.00, 0, 1.60, 0.45, 0.50, 0, M.wood);
+  [[1.05],[1.59],[2.13]].forEach(p=>B(g,p[0],0.451,0.50,0.004,0.40,0.05,M.woodDk));
+  B(g, 1.00, 0, 1.60, 0.45, 0.02, 0.50, M.darkTop);
+  lgMonitor(g, 1.50, 0.52, 0.12);
+  B(g, 1.12, 0.10, 0.092, 0.26, 0.39, 0.52, M.white);   // PS5 vertical
+  B(g, 1.28, 0.12, 0.15, 0.15, 0.30, 0.52, M.black);    // Series X
+  B(g, 2.28, 0.14, 0.11, 0.22, 0.11, 0.52, M.device);   // Switch OLED dock
+  // biblioteca completa (h240, até o canto)
+  B(g, 0, 0, 0.35, 1.72, 2.40, 0, M.woodDk);
+  for(let r=0;r<6;r++) nichePlateX(g, 0.04, 0.20+r*0.36, 1.64, 0.30, 0.351);
+  // bancada dev na parede NE inteira (270×70)
+  B(g, 2.85, 0, 0.70, 2.70, 0.04, 0.72, M.darkTop);
+  B(g, 2.88, 0.02, 0.64, 0.04, 0.72, 0, M.darkTop);
+  B(g, 2.88, 2.64, 0.64, 0.04, 0.72, 0, M.darkTop);
+  B(g, 2.90, 2.15, 0.60, 0.50, 0.60, 0, M.wood);        // gaveteiro
+  B(g, 3.30, 0.95, 0.04, 0.62, 0.43, 0.90, M.screen);   // Studio Display
+  B(g, 3.34, 1.18, 0.16, 0.12, 0.14, 0.76, M.metal);
+  B(g, 3.02, 2.25, 0.42, 0.38, 0.24, 0.76, M.device);   // impressora (zona final)
+  chair(g, 2.55, 1.25, -Math.PI/2);
+  // sofá-cama Gênova 127×91×82 (aberto vira cama 127×191 — sobra 34 até a credenza)
+  B(g, 1.15, 1.79, 1.27, 0.91, 0.43, 0, M.navy);
+  B(g, 1.15, 2.44, 1.27, 0.26, 0.39, 0.43, M.navy);
+  B(g, 1.19, 1.84, 1.19, 0.56, 0.09, 0.43, M.navyLt);
+  return g;
+}
+
+// ---------- option switching ----------
+const DESCS = {
+  A: "Parede arcade (30 nichos + CRT + LG) · biblioteca completa até o teto · compartimento oculto 35×35×200 no canto (porta de toque, p/ fontes, cabos e controles reserva) · bancada dev 250 encostada na parede da janela.",
+  B: "Parede arcade (38 nichos + CRT + LG, torre esquerda inteira de 110) · vitrine de mídias 107×15 (~8 m lineares), com respiro de 30 p/ a torre · prateleira p/ 10 livros · bancada dev 250 na sudeste, encostada na parede da janela.",
+  C: "Sem coleção: credenza com LG + Series X, PS5 e Switch · biblioteca completa · bancada dev na parede da janela inteira (270) · sofá-cama Gênova 127×91 (abre p/ cama de casal 191 — cabe com folga de 34)."
+};
+const builders = {A: optionA, B: optionB, C: optionC};
+let current = null;
+function show(opt){
+  if(current){ scene.remove(current); }
+  current = builders[opt]();
+  scene.add(current);
+  document.getElementById('desc').textContent = DESCS[opt];
+  ['bA','bB','bC'].forEach(id=>document.getElementById(id).classList.toggle('on', id === 'b'+opt));
+}
+document.getElementById('bA').addEventListener('click', ()=>show('A'));
+document.getElementById('bB').addEventListener('click', ()=>show('B'));
+document.getElementById('bC').addEventListener('click', ()=>show('C'));
+show('B');
+
+// ---------- render loop (walls auto-hide) ----------
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  gNW.visible = camera.position.z > 0.15;
+  gSE.visible = camera.position.z < D - 0.15;
+  gSW.visible = camera.position.x > 0.15;
+  gNE.visible = camera.position.x < W - 0.15;
+  renderer.render(scene, camera);
+}
+animate();
+addEventListener('resize', ()=>{
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+})();
+</script>

@@ -1,0 +1,322 @@
+<title>Sala Dev & Coleção</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#FAF8F3; --sheet:#FFFFFF; --ink:#26221B; --ink-soft:#6B6459;
+    --line:#DED9CF; --blue:#2456A6; --blue-soft:#2456A614;
+    --wood:#B08A5E; --wood-fill:#B08A5E2E; --red:#C8442C;
+    --screen:#3A3630; --screen-fill:#3A363022;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1C1A16; --sheet:#24211C; --ink:#EDE8DF; --ink-soft:#A39B8D;
+      --line:#3B372F; --blue:#7DA5E8; --blue-soft:#7DA5E81F;
+      --wood:#C9A070; --wood-fill:#C9A07026; --red:#E0705A;
+      --screen:#CFC9BE; --screen-fill:#CFC9BE1F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1C1A16; --sheet:#24211C; --ink:#EDE8DF; --ink-soft:#A39B8D;
+    --line:#3B372F; --blue:#7DA5E8; --blue-soft:#7DA5E81F;
+    --wood:#C9A070; --wood-fill:#C9A07026; --red:#E0705A;
+    --screen:#CFC9BE; --screen-fill:#CFC9BE1F;
+  }
+  body{background:var(--paper); color:var(--ink); font-family:"IBM Plex Sans",system-ui,sans-serif;
+    line-height:1.55; margin:0; padding:32px 20px 72px;}
+  .wrap{max-width:880px; margin:0 auto;}
+  header.carimbo{border:2px solid var(--ink); padding:20px 24px; display:flex; flex-wrap:wrap;
+    justify-content:space-between; align-items:flex-end; gap:12px 24px; margin-bottom:36px;}
+  h1{font-family:Archivo,sans-serif; font-weight:800; font-size:clamp(26px,4.5vw,38px);
+    letter-spacing:-.01em; margin:0; text-wrap:balance;}
+  .meta{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-soft); text-align:right;}
+  .meta strong{color:var(--ink); font-weight:500;}
+  section.folha{background:var(--sheet); border:1px solid var(--line); padding:24px 24px 28px; margin-bottom:32px;}
+  .folha-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:18px;}
+  .folha-head h2{font-family:Archivo,sans-serif; font-weight:800; font-size:20px; margin:0;}
+  .folha-num{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--blue); letter-spacing:.08em;}
+  figure{margin:0; overflow-x:auto;}
+  svg{width:100%; height:auto; display:block;}
+  svg text{font-family:"IBM Plex Mono",monospace; fill:var(--ink);}
+  .t10{font-size:10px;} .t11{font-size:11px;} .t12{font-size:12px; font-weight:500;}
+  .soft{fill:var(--ink-soft);}
+  .wall{fill:none; stroke:var(--ink); stroke-width:5;}
+  .fix{stroke:var(--blue); fill:var(--blue-soft);}
+  .fixl{stroke:var(--blue); fill:none;}
+  .dash{stroke-dasharray:6 4;}
+  .dim{stroke:var(--ink-soft); stroke-width:1;}
+  .dimt{font-size:10px; fill:var(--ink-soft);}
+  .furn{fill:var(--wood-fill); stroke:var(--wood); stroke-width:1.6;}
+  .scr{fill:var(--screen-fill); stroke:var(--screen); stroke-width:1.4;}
+  .hl{fill:none; stroke:var(--red); stroke-width:1.6;}
+  .notes{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-top:18px;}
+  .note{border-left:3px solid var(--wood); padding:2px 0 2px 12px; font-size:13.5px;}
+  .note.b{border-color:var(--blue);} .note.r{border-color:var(--red);}
+  .note strong{display:block; font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:2px; font-weight:500;}
+  table{border-collapse:collapse; width:100%; font-size:13.5px; font-variant-numeric:tabular-nums;}
+  th,td{border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top;}
+  th{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.07em; text-transform:uppercase;
+    font-weight:500; color:var(--ink-soft); background:var(--blue-soft);}
+  p.lede{font-size:14.5px; max-width:64ch; color:var(--ink-soft); margin:0 0 22px;}
+  ul.next{font-size:14px; padding-left:20px; margin:10px 0 0;}
+  ul.next li{margin-bottom:6px;}
+</style>
+
+<div class="wrap">
+<header class="carimbo">
+  <div>
+    <h1>Sala Dev &amp; Coleção</h1>
+    <div style="font-size:13.5px;color:var(--ink-soft);margin-top:4px">Estudo de layout · escritório + sala de coleção retrô</div>
+  </div>
+  <div class="meta">
+    AMBIENTE <strong>3,55 × 2,70 m · pé-direito 2,64 m</strong><br>
+    CLIENTE <strong>Israel Melicio</strong> · DATA <strong>06 SET 2026</strong><br>
+    FOLHAS <strong>01–05</strong> · REV <strong>11</strong> · medidas em <strong>cm</strong>
+  </div>
+</header>
+
+<p class="lede">Rebase completo do ambiente. Elementos fixos (azul): porta, janela e ar-condicionado — todo o resto é novo. O sofá e o mobiliário atual saem do projeto. As folhas 03 e 04 apresentam as duas opções pedidas: <b>A</b> com a biblioteca completa e <b>B</b> com a biblioteca reduzida a ~10 livros. Rev 2: estação de jogos <b>integrada à estante da coleção</b> (parede arcade) — CRT e LG do mesmo lado dos consoles e <b>nenhum cabo cruzando o piso</b>, que não será alterado. Rev 3 acrescenta a <b>Opção C</b>: abrir mão da coleção, ficando só Series X, PS5 e Switch OLED.</p>
+
+<!-- ============ FOLHA 01 — PLANTA BASE ============ -->
+<section class="folha">
+  <div class="folha-head"><h2>Planta base — elementos fixos</h2><span class="folha-num">FOLHA 01</span></div>
+  <figure><svg viewBox="0 0 790 585" role="img" aria-label="Planta baixa do ambiente vazio com medidas">
+    <!-- dimension: top overall 355 -->
+    <line class="dim" x1="95" y1="34" x2="663" y2="34"/>
+    <line class="dim" x1="95" y1="28" x2="95" y2="40"/><line class="dim" x1="663" y1="28" x2="663" y2="40"/>
+    <text class="dimt" x="379" y="30" text-anchor="middle">355</text>
+    <!-- dimension: right overall 270 -->
+    <line class="dim" x1="737" y1="55" x2="737" y2="487"/>
+    <line class="dim" x1="731" y1="55" x2="743" y2="55"/><line class="dim" x1="731" y1="487" x2="743" y2="487"/>
+    <text class="dimt" x="752" y="275" text-anchor="middle">270</text>
+    <!-- dimension: window segments (right, inner) -->
+    <line class="dim" x1="692" y1="55" x2="692" y2="487"/>
+    <line class="dim" x1="686" y1="59.8" x2="698" y2="59.8"/>
+    <line class="dim" x1="686" y1="251.8" x2="698" y2="251.8"/>
+    <text class="dimt" x="706" y="57" text-anchor="start">3</text>
+    <text class="dimt" x="700" y="158" text-anchor="start">120</text>
+    <text class="dimt" x="700" y="372" text-anchor="start">147</text>
+    <!-- dimension: door segments (left) -->
+    <line class="dim" x1="63" y1="55" x2="63" y2="487"/>
+    <line class="dim" x1="57" y1="333.4" x2="69" y2="333.4"/>
+    <line class="dim" x1="57" y1="467.8" x2="69" y2="467.8"/>
+    <text class="dimt" x="52" y="196" text-anchor="end">174</text>
+    <text class="dimt" x="52" y="404" text-anchor="end">84</text>
+    <text class="dimt" x="52" y="481" text-anchor="end">12</text>
+    <!-- walls -->
+    <rect class="wall" x="95" y="55" width="568" height="432"/>
+    <!-- window opening on right wall -->
+    <line x1="663" y1="59.8" x2="663" y2="251.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line class="fixl" x1="660" y1="59.8" x2="660" y2="251.8" stroke-width="2"/>
+    <line class="fixl" x1="666" y1="59.8" x2="666" y2="251.8" stroke-width="2"/>
+    <text class="t11" transform="rotate(90 683 100)" x="683" y="100" fill="var(--blue)">JANELA 120×120 · peitoril 106</text>
+    <!-- door opening on left wall -->
+    <line x1="95" y1="333.4" x2="95" y2="467.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line class="fixl" x1="95" y1="333.4" x2="229.4" y2="333.4" stroke-width="0"/>
+    <line class="fixl" x1="95" y1="467.8" x2="95" y2="333.4" stroke-width="0"/>
+    <line x1="95" y1="467.8" x2="200" y2="395" stroke="var(--blue)" stroke-width="2.5"/>
+    <path class="fixl dash" d="M 95 333.4 A 134.4 134.4 0 0 1 229.4 467.8" stroke-width="1.4"/>
+    <text class="t11" x="140" y="325" fill="var(--blue)">PORTA 84 · h216</text>
+    <!-- AC on top wall -->
+    <rect class="fix dash" x="306.2" y="55" width="120" height="44.8" stroke-width="1.6"/>
+    <text class="t11" x="366" y="76" text-anchor="middle" fill="var(--blue)">AC SPLIT 75×28</text>
+    <text class="t10 soft" x="366" y="115" text-anchor="middle">corpo entre 219–249 do piso · a 132 da parede da porta</text>
+    <!-- wall names -->
+    <text class="t11 soft" x="379" y="49" text-anchor="middle">NOROESTE · 355</text>
+    <text class="t11 soft" x="379" y="502" text-anchor="middle">SUDESTE · 355</text>
+    <text class="t11 soft" transform="rotate(-90 84 271)" x="84" y="271" text-anchor="middle">SUDOESTE · 270</text>
+    <text class="t11 soft" transform="rotate(90 676 430)" x="676" y="430" text-anchor="middle">NORDESTE · 270</text>
+    <!-- scale bar -->
+    <line class="dim" x1="95" y1="545" x2="255" y2="545" stroke-width="2"/>
+    <line class="dim" x1="95" y1="539" x2="95" y2="551"/><line class="dim" x1="175" y1="541" x2="175" y2="549"/><line class="dim" x1="255" y1="539" x2="255" y2="551"/>
+    <text class="dimt" x="95" y="565">0</text><text class="dimt" x="169" y="565">50</text><text class="dimt" x="243" y="565">100 cm</text>
+    <!-- north -->
+    <g transform="translate(725,530)"><path d="M0,10 L6,-10 L12,10 L6,4 Z" fill="var(--ink)" transform="rotate(45 6 0)"/><text class="t11" x="24" y="4">N</text></g>
+  </svg></figure>
+  <div class="notes">
+    <div class="note b"><strong>Fixos</strong>Porta abre para dentro, dobradiça no lado sudeste (confirmar). Janela a só 3 cm do canto norte. AC 75×30×28 com corpo entre 219 e 249 do piso — a estante da coleção passa livre por baixo.</div>
+    <div class="note b"><strong>Elétrica</strong>Tomadas existentes na parede sudeste (canto leste). Levantamento completo pendente — necessário antes do detalhamento.</div>
+  </div>
+</section>
+
+<!-- ============ FOLHA 02 — PROGRAMA ============ -->
+<section class="folha">
+  <div class="folha-head"><h2>Programa de necessidades</h2><span class="folha-num">FOLHA 02</span></div>
+  <table>
+    <tr><th style="width:26%">Zona</th><th>Requisitos dimensionados</th></tr>
+    <tr><td><b>Estante da coleção</b></td><td>29 consoles. Nicho padrão <b>40 × 28 prof × 20 alt</b> cobre a maioria. Especiais: 1 nicho ≥ 52 (Intellivision 49, Sega CD 45,7); Odyssey pede prof. 33+; PS5 (39↑) e Series X (30↑) verticais no topo.</td></tr>
+    <tr><td><b>Estação de jogos</b></td><td>TV CRT 57×48×36 (pesada) + monitor LG 61×53×23, lado a lado e <b>integrados à estante da coleção</b> (mesmo lado dos consoles — interligados por cabos). Gavetões p/ <b>~58 controles</b> (2 por console).</td></tr>
+    <tr><td><b>Bancada dev</b></td><td>Studio Display 27″ + MacBook Pro + Mac Studio + Mac mini + KVM + impressora + gaveteiro + no-break. Totalmente separada da zona de jogos.</td></tr>
+    <tr><td><b>Mídias</b></td><td>~250 jogos (cartuchos + CD) ≈ <b>6,5 m lineares</b> — e a coleção cresce: prever folga.</td></tr>
+    <tr><td><b>Biblioteca</b></td><td><b>Opção A:</b> acervo completo (~5 prateleiras). <b>Opção B:</b> nicho p/ ~10 livros; acervo vai p/ o escritório da empresa.</td></tr>
+    <tr><td><b>Cabeamento</b></td><td><b>1 tomada por console (~29)</b> + displays + switchers. A/V por console: componente (3 RCA) + estéreo (2 RCA) <i>ou</i> composto (3 RCA) → matriz/switchers até CRT e LG, que ficam <b>juntos no mesmo trecho de parede</b>. Estrutura de passagem (elétrica ≠ A/V) atrás da estante, detalhada na fase de marcenaria. <b>Restrição dura: nenhum cabo cruza ou passa pelo piso.</b></td></tr>
+  </table>
+</section>
+
+<!-- ============ FOLHA 03 — OPÇÃO A ============ -->
+<section class="folha">
+  <div class="folha-head"><h2>Opção A — parede arcade + biblioteca completa</h2><span class="folha-num">FOLHA 03</span></div>
+  <figure><svg viewBox="0 0 790 545" role="img" aria-label="Planta baixa da Opção A com mobiliário">
+    <rect class="wall" x="95" y="55" width="568" height="432"/>
+    <line x1="663" y1="59.8" x2="663" y2="251.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line class="fixl" x1="660" y1="59.8" x2="660" y2="251.8" stroke-width="2"/>
+    <line class="fixl" x1="666" y1="59.8" x2="666" y2="251.8" stroke-width="2"/>
+    <line x1="95" y1="333.4" x2="95" y2="467.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line x1="95" y1="467.8" x2="200" y2="395" stroke="var(--blue)" stroke-width="2.5"/>
+    <path class="fixl dash" d="M 95 333.4 A 134.4 134.4 0 0 1 229.4 467.8" stroke-width="1.4"/>
+    <rect class="fix dash" x="306.2" y="55" width="120" height="32" stroke-width="1.4"/>
+    <text class="t10" x="366" y="48" text-anchor="middle" fill="var(--blue)">AC (alto: 219–249)</text>
+    <!-- Parede arcade: torres de nichos + displays integrados -->
+    <rect class="furn" x="151" y="55" width="120" height="56"/>
+    <text class="t11" x="211" y="79" text-anchor="middle">TORRE 75×35</text>
+    <text class="t10 soft" x="211" y="97" text-anchor="middle">h200 · 8 nichos</text>
+    <rect class="furn" x="271" y="55" width="224" height="80"/>
+    <rect class="scr" x="287" y="63" width="91" height="58"/>
+    <text class="t10" x="332" y="96" text-anchor="middle">CRT</text>
+    <rect class="scr" x="394" y="70" width="98" height="37"/>
+    <text class="t10" x="443" y="93" text-anchor="middle">LG 27″</text>
+    <text class="t10 soft" x="383" y="129" text-anchor="middle">displays · prof 50 · ponte c/ 6 nichos · gavetões de mídia</text>
+    <rect class="furn" x="495" y="55" width="168" height="56"/>
+    <text class="t11" x="579" y="79" text-anchor="middle">TORRE 105×35</text>
+    <text class="t10 soft" x="579" y="97" text-anchor="middle">h200 · 16 nichos</text>
+    <text class="t12" x="379" y="157" text-anchor="middle">PAREDE ARCADE — coleção + estação de jogos · cabos atrás do móvel</text>
+    <!-- Biblioteca (SW wall, até o canto) + compartimento oculto no canto -->
+    <rect class="furn" x="95" y="55" width="56" height="275"/>
+    <rect class="furn hl" x="95" y="55" width="56" height="56"/>
+    <text class="t10" x="123" y="88" text-anchor="middle">oculto</text>
+    <text class="t11" transform="rotate(-90 121 192)" x="121" y="192" text-anchor="middle">BIBLIOTECA 172×35 · h250</text>
+    <text class="t10 soft" transform="rotate(-90 141 192)" x="141" y="192" text-anchor="middle">até a sanca · recorte no encontro c/ a torre</text>
+    <!-- Bancada dev (SE wall) -->
+    <rect class="furn" x="263" y="375" width="400" height="112"/>
+    <text class="t11" x="463" y="425" text-anchor="middle">BANCADA DEV 250×70 — encosta na janela</text>
+    <text class="t10 soft" x="463" y="443" text-anchor="middle">impressora, gaveteiro e no-break embaixo</text>
+    <rect class="scr" x="430" y="292" width="72" height="72" rx="10"/>
+    <text class="t10" x="466" y="332" text-anchor="middle">cadeira</text>
+    <!-- pufe -->
+    <rect class="scr" x="339" y="195" width="80" height="80" rx="14"/>
+    <text class="t10" x="379" y="239" text-anchor="middle">pufe</text>
+    <text class="t11 soft" x="379" y="530" text-anchor="middle">nenhum cabo cruza o piso · porta e janela desimpedidas</text>
+  </svg></figure>
+  <div class="notes">
+    <div class="note"><strong>Parede arcade</strong>Torres assimétricas: 75 (8 nichos) + 105 (16) + ponte de 6 sobre os displays = 30 nichos (29 consoles + 1 reserva), incl. extra-largos p/ Intellivision e Sega CD. PS5 e Series X verticais no topo (200 + 39 = 239 — livre da sanca, a confirmar).</div>
+    <div class="note r"><strong>Compartimento oculto no canto</strong>O vão de 35×35 entre a torre recuada e a biblioteca vira um <b>armário secreto de h200</b>, acessado por dentro dos nichos da torre: <b>1 tampa removível de madeira (5–8 mm) por prateleira</b> no painel lateral compartilhado — 8 tampas, níveis alinhados c/ as prateleiras da torre. Interno ~31×31; nível inferior p/ régua/hub. Spec p/ marcenaria em furniture/compartimento-oculto.md. De 200 a 250 a biblioteca fecha o canto.</div>
+    <div class="note b"><strong>Cabeamento</strong>Fundo técnico recuado (~7) atrás de todo o móvel: elétrica e A/V descem por dentro até os switchers na seção dos displays — nenhum cabo cruza o piso.</div>
+    <div class="note r"><strong>Mídias no limite</strong>Gavetões sob os displays + 1 nicho reserva ≈ 5 m lineares p/ ~250 jogos. A biblioteca full-height pode ceder 2 prateleiras baixas às mídias (+ ~3,5 m) se o acervo de livros couber no restante.</div>
+  </div>
+</section>
+
+<!-- ============ FOLHA 04 — OPÇÃO B ============ -->
+<section class="folha">
+  <div class="folha-head"><h2>Opção B — parede arcade + biblioteca mínima (~10 livros)</h2><span class="folha-num">FOLHA 04</span></div>
+  <figure><svg viewBox="0 0 790 545" role="img" aria-label="Planta baixa da Opção B com mobiliário">
+    <rect class="wall" x="95" y="55" width="568" height="432"/>
+    <line x1="663" y1="59.8" x2="663" y2="251.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line class="fixl" x1="660" y1="59.8" x2="660" y2="251.8" stroke-width="2"/>
+    <line class="fixl" x1="666" y1="59.8" x2="666" y2="251.8" stroke-width="2"/>
+    <line x1="95" y1="333.4" x2="95" y2="467.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line x1="95" y1="467.8" x2="200" y2="395" stroke="var(--blue)" stroke-width="2.5"/>
+    <path class="fixl dash" d="M 95 333.4 A 134.4 134.4 0 0 1 229.4 467.8" stroke-width="1.4"/>
+    <rect class="fix dash" x="306.2" y="55" width="120" height="32" stroke-width="1.4"/>
+    <text class="t10" x="366" y="48" text-anchor="middle" fill="var(--blue)">AC (alto: 219–249)</text>
+    <!-- Parede arcade: torre esquerda inteira + displays integrados -->
+    <rect class="furn" x="95" y="55" width="176" height="56"/>
+    <text class="t11" x="183" y="79" text-anchor="middle">TORRE 110×35</text>
+    <text class="t10 soft" x="183" y="97" text-anchor="middle">h200 · 16 nichos</text>
+    <rect class="furn" x="271" y="55" width="224" height="80"/>
+    <rect class="scr" x="287" y="63" width="91" height="58"/>
+    <text class="t10" x="332" y="96" text-anchor="middle">CRT</text>
+    <rect class="scr" x="394" y="70" width="98" height="37"/>
+    <text class="t10" x="443" y="93" text-anchor="middle">LG 27″</text>
+    <text class="t10 soft" x="383" y="129" text-anchor="middle">displays · prof 50 · ponte c/ 6 nichos · gavetões de controles</text>
+    <rect class="furn" x="495" y="55" width="168" height="56"/>
+    <text class="t11" x="579" y="79" text-anchor="middle">TORRE 105×35</text>
+    <text class="t10 soft" x="579" y="97" text-anchor="middle">h200 · 16 nichos</text>
+    <text class="t12" x="379" y="157" text-anchor="middle">PAREDE ARCADE — coleção + estação de jogos · cabos atrás do móvel</text>
+    <!-- Estante de mídias (SW wall, respiro de 30 após a torre) -->
+    <rect class="furn hl" x="95" y="159" width="24" height="171"/>
+    <text class="t11" transform="rotate(-90 107 245)" x="107" y="245" text-anchor="middle">MÍDIAS 107×15 · h200</text>
+    <text class="t10 soft" transform="rotate(-90 132 245)" x="132" y="245" text-anchor="middle">~8 m lineares — cartuchos e CDs</text>
+    <!-- Bancada dev (SE wall) -->
+    <rect class="furn" x="263" y="375" width="400" height="112"/>
+    <text class="t11" x="463" y="425" text-anchor="middle">BANCADA DEV 250×70 — encosta na janela</text>
+    <text class="t10 soft" x="463" y="443" text-anchor="middle">prateleira p/ 10 livros sobre a bancada</text>
+    <rect class="scr" x="430" y="292" width="72" height="72" rx="10"/>
+    <text class="t10" x="466" y="332" text-anchor="middle">cadeira</text>
+    <rect class="scr" x="339" y="195" width="80" height="80" rx="14"/>
+    <text class="t10" x="379" y="239" text-anchor="middle">pufe</text>
+    <text class="t11 soft" x="379" y="530" text-anchor="middle">nenhum cabo cruza o piso · parede sudoeste vira vitrine de mídias</text>
+  </svg></figure>
+  <div class="notes">
+    <div class="note r"><strong>O ganho da opção B</strong>Torre esquerda inteira (110, 16 nichos) → <b>38 nichos no total</b> (29 consoles + 9 reservas p/ mídias/controles). Vitrine de cartuchos e CDs rasa (15 prof), 107 de largura: ~8 m lineares — ainda acima da necessidade atual (~6,5 m).</div>
+    <div class="note b"><strong>Cabeamento</strong>Mesma parede arcade da Opção A: fundo técnico recuado, elétrica e A/V atrás do móvel, switchers junto aos displays — nenhum cabo cruza o piso.</div>
+    <div class="note"><strong>Livros</strong>Prateleira única de 90 cm sobre a bancada dev guarda os ~10 livros de uso frequente.</div>
+    <div class="note r"><strong>Encaixe do canto</strong>Respiro de <b>30</b> entre a torre e a vitrine: o acesso à coluna do canto fica totalmente livre — validado no modelo 3D.</div>
+  </div>
+</section>
+
+<!-- ============ FOLHA 05 — OPÇÃO C ============ -->
+<section class="folha">
+  <div class="folha-head"><h2>Opção C — sem coleção (só Series X, PS5 e Switch)</h2><span class="folha-num">FOLHA 05</span></div>
+  <figure><svg viewBox="0 0 790 545" role="img" aria-label="Planta baixa da Opção C, minimalista, sem a coleção retrô">
+    <rect class="wall" x="95" y="55" width="568" height="432"/>
+    <line x1="663" y1="59.8" x2="663" y2="251.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line class="fixl" x1="660" y1="59.8" x2="660" y2="251.8" stroke-width="2"/>
+    <line class="fixl" x1="666" y1="59.8" x2="666" y2="251.8" stroke-width="2"/>
+    <line x1="95" y1="333.4" x2="95" y2="467.8" stroke="var(--sheet)" stroke-width="7"/>
+    <line x1="95" y1="467.8" x2="200" y2="395" stroke="var(--blue)" stroke-width="2.5"/>
+    <path class="fixl dash" d="M 95 333.4 A 134.4 134.4 0 0 1 229.4 467.8" stroke-width="1.4"/>
+    <rect class="fix dash" x="306.2" y="55" width="120" height="32" stroke-width="1.4"/>
+    <text class="t10" x="366" y="48" text-anchor="middle" fill="var(--blue)">AC (alto: 219–249)</text>
+    <!-- Credenza game (NW, sob o AC) -->
+    <rect class="furn" x="255" y="55" width="256" height="72"/>
+    <rect class="scr" x="334" y="63" width="98" height="37"/>
+    <text class="t10" x="383" y="86" text-anchor="middle">LG 27″</text>
+    <text class="t10 soft" x="383" y="117" text-anchor="middle">Series X · PS5 · Switch OLED</text>
+    <text class="t12" x="383" y="152" text-anchor="middle">CREDENZA GAME 160×45 · h50 · cabos atrás do móvel</text>
+    <!-- Biblioteca (SW wall) -->
+    <rect class="furn" x="95" y="111" width="56" height="219"/>
+    <text class="t11" transform="rotate(-90 123 222)" x="123" y="222" text-anchor="middle">BIBLIOTECA 137×35 · h240</text>
+    <!-- Bancada dev (NE wall) -->
+    <rect class="furn" x="551" y="55" width="112" height="432"/>
+    <text class="t11" transform="rotate(90 596 240)" x="596" y="240" text-anchor="middle">BANCADA DEV 270×70 — parede inteira</text>
+    <text class="t10 soft" transform="rotate(90 626 240)" x="626" y="240" text-anchor="middle">frente p/ janela · gaveteiro e no-break embaixo</text>
+    <line class="dim" x1="551" y1="343" x2="663" y2="343"/>
+    <text class="t10 soft" transform="rotate(90 600 415)" x="600" y="415" text-anchor="middle">impressora / apoio</text>
+    <rect class="scr" x="475" y="230" width="72" height="72" rx="10"/>
+    <text class="t10" x="511" y="270" text-anchor="middle">cadeira</text>
+    <!-- Sofá-cama Gênova (SE) -->
+    <rect class="fixl dash" x="279" y="181" width="203" height="306" stroke-width="1.2"/>
+    <text class="t10 soft" x="380" y="200" text-anchor="middle">aberto: cama 127×191 · sobra 34 até a credenza</text>
+    <rect class="furn" x="279" y="341" width="203" height="146" rx="8"/>
+    <text class="t11" x="380" y="408" text-anchor="middle">SOFÁ-CAMA GÊNOVA</text>
+    <text class="t10 soft" x="380" y="426" text-anchor="middle">127×91 · frente p/ a tela</text>
+    <text class="t11 soft" x="379" y="530" text-anchor="middle">a coleção sai do ambiente · sala leve, com lounge de verdade</text>
+  </svg></figure>
+  <div class="notes">
+    <div class="note"><strong>O ambiente respira</strong>3 consoles modernos cabem numa credenza de 160 — os outros 26 e o CRT saem do projeto (venda ou self-storage definitivo). Só 3 tomadas + HDMI, tudo atrás do móvel.</div>
+    <div class="note"><strong>Biblioteca completa</strong>Com a parede arcade fora, o acervo inteiro volta sem custo de espaço — a escolha A×B deixa de existir.</div>
+    <div class="note b"><strong>Sofá-cama Gênova (Mobly)</strong>127×91×82 fechado; abre p/ <b>cama de casal 127×191 sem mover nada</b> — aberto sobra 34 até a credenza. Termina a ~43 da bancada; o trecho final da bancada segue como zona de impressora. Ficha em furniture/sofa-cama-genova.md.</div>
+    <div class="note r"><strong>O que se perde</strong>A identidade de sala de coleção: nada de vitrine retrô, CRT nem nichos. É a opção mais confortável — e a de maior renúncia.</div>
+  </div>
+</section>
+
+<!-- ============ COMPARATIVO ============ -->
+<section class="folha">
+  <div class="folha-head"><h2>Comparativo e próximos passos</h2><span class="folha-num">RESUMO</span></div>
+  <table>
+    <tr><th></th><th>Opção A — biblioteca completa</th><th>Opção B — 10 livros</th><th>Opção C — sem coleção</th></tr>
+    <tr><td><b>Coleção em casa</b></td><td>29 consoles + CRT (traz tudo do self-storage)</td><td>29 consoles + CRT (traz tudo do self-storage)</td><td>3 modernos — 26 consoles e o CRT saem</td></tr>
+    <tr><td><b>Mídias (~250, crescendo)</b></td><td>≈ 5 m (+ ~3,5 se a biblioteca ceder 2 prateleiras)</td><td>≈ 8 m lineares + 9 nichos reserva</td><td>— (só jogos atuais)</td></tr>
+    <tr><td><b>Livros em casa</b></td><td>acervo completo</td><td>~10 títulos</td><td>acervo completo</td></tr>
+    <tr><td><b>Sensação do ambiente</b></td><td>mais cheio: torres h200 + biblioteca h250</td><td>mais leve; parede da porta rasa (15)</td><td>a mais leve — sofá-cama vira cama de casal p/ hóspedes</td></tr>
+    <tr><td><b>Cabeamento</b></td><td>~29 tomadas + matriz A/V</td><td>~29 tomadas + matriz A/V</td><td>3 tomadas + HDMI</td></tr>
+  </table>
+  <ul class="next">
+    <li>Confirmar: lado das dobradiças da porta e levantamento das tomadas existentes.</li>
+    <li>Cabeamento resolvido: tudo concentrado na parede arcade, percursos mínimos atrás do móvel — piso intocado (ver docs/wiring.md).</li>
+    <li><b>Modelos 3D das três opções</b> p/ apoiar a decisão → depois: elevações + detalhamento da marcenaria nicho a nicho.</li>
+    <li>Depois: modelo 3D navegável do ambiente.</li>
+  </ul>
+</section>
+</div>
