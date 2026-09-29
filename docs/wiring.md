@@ -32,3 +32,8 @@ Implicações:
 ## Mureta do AC (29/09/2026)
 - Saliência 106×7×h98 na parede NW, trecho 248–354 (contém tubulação/dreno do AC — **não furar**).
 - O fundo técnico dos móveis da parede NW contorna a mureta abaixo de 98; passagens de cabo nesse trecho sobem por cima dela.
+
+## Cadeia A/V da Opção E (29/09/2026)
+- Equipamentos fixados no painel técnico removível atrás da baia da credenza (18 mm, 782×700, parafusos de aperto manual, acesso por dentro da baia): **chaveador SCART 6×1, chaveador AV 6×1, chaveador HDMI 6×1 e GBS-Control**, + régua de 12 tomadas.
+- Sinal: retrô SCART/RGB → SCART 6×1 → GBS-Control; retrô RCA/componente → AV 6×1 → GBS-Control; GBS-Control → LG (HDMI, conversor se necessário). PS5/Series X/Switch → HDMI 6×1 → LG (3 entradas livres).
+- Tomada dupla de parede na zona central da credenza (1375–2175 da porta, h≈300), fora da mureta.
