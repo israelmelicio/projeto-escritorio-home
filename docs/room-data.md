@@ -39,6 +39,12 @@ Medidas levantadas em 06/09/2026. Todas em **cm**. Fotos em `reference/IMG_3135�
 - De frente para a porta (por dentro): **12** à esquerda (canto SE) · **174** à direita (canto NW)
 - Abre para dentro do ambiente
 
+## Mureta do ar-condicionado (parede NW) — NOVO, 29/09/2026
+- Saliência de gesso na parede NW (instalação do AC): **106 larg × 98 alt × 7 prof** (cm), a partir do piso.
+- Posição: borda mais próxima a **248 da parede da porta** → ocupa o trecho **248–354** da parede NW (encosta praticamente no canto da janela).
+- Foto: `reference/IMG_3776-mureta-ac.jpg`.
+- Impacto: todo móvel encostado na parede NW precisa de recorte de 7 no fundo até h98 nesse trecho — pode se integrar ao fundo técnico (~7) já previsto p/ cabeamento.
+
 ## Estado atual (fotos)
 - **NW (azul):** estante de nichos branca com coleção de consoles retrô (SNES, Mega Drive, Atari, Dreamcast, Saturn, N64, PS5, Xbox Series X…), TV CRT Samsung, gavetas azul-marinho
 - **Canto leste (NE/SE):** mesa em L de madeira escura com monitor Apple, MacBook, Mac Studio/Mini, segundo monitor/TV para consoles; cadeira gamer de couro caramelo; prateleiras suspensas escuras com livros, action figures e pôsteres (Star Wars, retro games)

@@ -28,3 +28,7 @@ Implicações:
 ## Compartimento oculto do canto (Opção A)
 - O vão 35×35×h200 entre a torre esquerda e a biblioteca vira armário secreto (porta de toque na lateral voltada p/ a torre, interno ~31×31, ~6 prateleiras).
 - Vizinho direto do fundo técnico da torre: candidato natural p/ **régua de tomadas/hub** e excedente de cabos, fontes, adaptadores e controles reserva.
+
+## Mureta do AC (29/09/2026)
+- Saliência 106×7×h98 na parede NW, trecho 248–354 (contém tubulação/dreno do AC — **não furar**).
+- O fundo técnico dos móveis da parede NW contorna a mureta abaixo de 98; passagens de cabo nesse trecho sobem por cima dela.
