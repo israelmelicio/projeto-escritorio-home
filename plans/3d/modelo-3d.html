@@ -1421,34 +1421,34 @@ function optionD(){
 
 function optionE(){
   const g = new THREE.Group();
-  // credenza arcade 230×45×h115, CENTRALIZADA na parede SE (62,5–292,5)
-  B(g, 0.625, 2.25, 2.30, 0.45, 1.15, 0, M.wood);
+  // credenza arcade 230×45×h115, CENTRALIZADA na parede (62,5–292,5)
+  B(g, 0.625, 0, 2.30, 0.45, 1.15, 0, M.wood);
   for(let r=0;r<2;r++){
-    nichePlate(g, 0.685, 0.12+r*0.46, 0.64, 0.38, 2.246);  // flanco esquerdo
-    nichePlate(g, 2.225, 0.12+r*0.46, 0.64, 0.38, 2.246);  // flanco direito
+    nichePlate(g, 0.685, 0.12+r*0.46, 0.64, 0.38, 0.451);  // flanco esquerdo
+    nichePlate(g, 2.225, 0.12+r*0.46, 0.64, 0.38, 0.451);  // flanco direito
   }
-  nichePlate(g, 1.385, 0.12, 0.78, 0.38, 2.246);           // fileira sob a baia
-  nichePlate(g, 1.385, 0.56, 0.78, 0.55, 2.246);           // baia da LG (recesso)
-  lgMonitor(g, 1.47, 0.58, 2.30);
-  B(g, 0.785, 2.35, 0.092, 0.26, 0.39, 1.15, M.white);     // PS5 vertical no topo
-  B(g, 1.025, 2.37, 0.15, 0.15, 0.30, 1.15, M.black);      // Series X
-  B(g, 2.525, 2.40, 0.11, 0.22, 0.11, 1.15, M.device);     // Switch OLED dock
+  nichePlate(g, 1.385, 0.12, 0.78, 0.38, 0.451);           // fileira sob a baia
+  nichePlate(g, 1.385, 0.56, 0.78, 0.55, 0.451);           // baia da LG (recesso)
+  lgMonitor(g, 1.47, 0.58, 0.10);
+  B(g, 0.785, 0.10, 0.092, 0.26, 0.39, 1.15, M.white);     // PS5 vertical no topo
+  B(g, 1.025, 0.12, 0.15, 0.15, 0.30, 1.15, M.black);      // Series X
+  B(g, 2.525, 0.15, 0.11, 0.22, 0.11, 1.15, M.device);     // Switch OLED dock
   // biblioteca completa até o canto (172×35, h240)
   B(g, 0, 0, 0.35, 1.72, 2.40, 0, M.woodDk);
   for(let r=0;r<6;r++) nichePlateX(g, 0.04, 0.20+r*0.36, 1.64, 0.30, 0.351);
-  // bancada dev 200×70 espelhada — começa no canto da janela, afastada 7 da mureta
-  B(g, 2.85, 0.07, 0.70, 2.00, 0.04, 0.72, M.darkTop);
-  B(g, 2.88, 0.09, 0.64, 0.04, 0.72, 0, M.darkTop);
-  B(g, 2.88, 2.01, 0.64, 0.04, 0.72, 0, M.darkTop);
-  B(g, 2.90, 1.42, 0.60, 0.50, 0.60, 0, M.wood);
-  B(g, 3.30, 0.85, 0.04, 0.62, 0.43, 0.90, M.screen);
-  B(g, 3.34, 1.08, 0.16, 0.12, 0.14, 0.76, M.metal);
-  B(g, 3.02, 1.60, 0.42, 0.38, 0.24, 0.76, M.device);
-  chair(g, 2.55, 1.10, -Math.PI/2);
-  // sofá-cama Gênova na parede NW (sob o AC, livre da mureta)
-  B(g, 1.15, 0, 1.27, 0.91, 0.43, 0, M.navy);
-  B(g, 1.15, 0, 1.27, 0.26, 0.39, 0.43, M.navy);
-  B(g, 1.19, 0.30, 1.19, 0.56, 0.09, 0.43, M.navyLt);
+  // bancada dev encurtada (200×70) — canto da janela livre
+  B(g, 2.85, 0.70, 0.70, 2.00, 0.04, 0.72, M.darkTop);
+  B(g, 2.88, 0.72, 0.64, 0.04, 0.72, 0, M.darkTop);
+  B(g, 2.88, 2.64, 0.64, 0.04, 0.72, 0, M.darkTop);
+  B(g, 2.90, 2.15, 0.60, 0.50, 0.60, 0, M.wood);
+  B(g, 3.30, 0.95, 0.04, 0.62, 0.43, 0.90, M.screen);
+  B(g, 3.34, 1.18, 0.16, 0.12, 0.14, 0.76, M.metal);
+  B(g, 3.02, 2.25, 0.42, 0.38, 0.24, 0.76, M.device);
+  chair(g, 2.55, 1.25, -Math.PI/2);
+  // sofá-cama Gênova — igual à C
+  B(g, 1.15, 1.79, 1.27, 0.91, 0.43, 0, M.navy);
+  B(g, 1.15, 2.44, 1.27, 0.26, 0.39, 0.43, M.navy);
+  B(g, 1.19, 1.84, 1.19, 0.56, 0.09, 0.43, M.navyLt);
   // porta de correr: trilho pelo corredor — sem giro dentro da sala (ver folha 07)
   return g;
 }
@@ -1459,7 +1459,7 @@ const DESCS = {
   B: "Parede arcade (38 nichos + CRT + LG, torre esquerda inteira de 110) · vitrine de mídias 107×15 (~8 m lineares), com respiro de 30 p/ a torre · prateleira p/ 10 livros · bancada dev 250 na sudeste, encostada na parede da janela.",
   C: "Sem coleção: credenza com LG + Series X, PS5 e Switch · biblioteca completa · bancada dev na parede da janela inteira (270) · sofá-cama Gênova 127×91 (abre p/ cama de casal 191 — cabe com folga de 34).",
   D: "Mesa em L e estante ATUAIS mantidas · parede arcade nova (torres 75+80 h200 + CRT + LG + ponte) · canto da janela: credenza baixa h115 (nada acima de 120 perto da janela) · vitrine de mídias 107×15.",
-  E: "Layout espelhado: sofá-cama Gênova na parede do AC (NW) · credenza arcade 230×45×h115 centralizada na parede SE (tomadas existentes) c/ 10 retrô + PS5, Series X e Switch · bancada 200 a partir do canto da janela (afastada 7 da mureta) · biblioteca completa · PORTA DE CORRER."
+  E: "Base na C: credenza arcade 230×45×h115 CENTRALIZADA (alinhada c/ o sofá) c/ 10 consoles retrô + PS5, Series X e Switch no topo · LG na baia central · biblioteca completa · bancada 200 (canto da janela livre) · sofá-cama Gênova · PORTA DE CORRER (trilho pelo corredor)."
 };
 const builders = {A: optionA, B: optionB, C: optionC, D: optionD, E: optionE};
 let current = null;
