@@ -1,0 +1,331 @@
+<meta charset="utf-8">
+<title>Marcenaria Opção E</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#FAF8F3; --sheet:#FFFFFF; --ink:#26221B; --ink-soft:#6B6459;
+    --line:#DED9CF; --blue:#2456A6; --blue-soft:#2456A614;
+    --wood:#B08A5E; --wood-fill:#B08A5E2E; --red:#C8442C;
+    --screen:#3A3630; --screen-fill:#3A363022;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1C1A16; --sheet:#24211C; --ink:#EDE8DF; --ink-soft:#A39B8D;
+      --line:#3B372F; --blue:#7DA5E8; --blue-soft:#7DA5E81F;
+      --wood:#C9A070; --wood-fill:#C9A07026; --red:#E0705A;
+      --screen:#CFC9BE; --screen-fill:#CFC9BE1F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1C1A16; --sheet:#24211C; --ink:#EDE8DF; --ink-soft:#A39B8D;
+    --line:#3B372F; --blue:#7DA5E8; --blue-soft:#7DA5E81F;
+    --wood:#C9A070; --wood-fill:#C9A07026; --red:#E0705A;
+    --screen:#CFC9BE; --screen-fill:#CFC9BE1F;
+  }
+  body{background:var(--paper); color:var(--ink); font-family:"IBM Plex Sans",system-ui,sans-serif;
+    line-height:1.55; margin:0; padding:32px 20px 72px;}
+  .wrap{max-width:880px; margin:0 auto;}
+  header.carimbo{border:2px solid var(--ink); padding:20px 24px; display:flex; flex-wrap:wrap;
+    justify-content:space-between; align-items:flex-end; gap:12px 24px; margin-bottom:36px;}
+  h1{font-family:Archivo,sans-serif; font-weight:800; font-size:clamp(26px,4.5vw,38px);
+    letter-spacing:-.01em; margin:0; text-wrap:balance;}
+  .meta{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-soft); text-align:right;}
+  .meta strong{color:var(--ink); font-weight:500;}
+  section.folha{background:var(--sheet); border:1px solid var(--line); padding:24px 24px 28px; margin-bottom:32px;}
+  .folha-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:18px;}
+  .folha-head h2{font-family:Archivo,sans-serif; font-weight:800; font-size:20px; margin:0;}
+  .folha-num{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--blue); letter-spacing:.08em;}
+  figure{margin:0 0 14px; overflow-x:auto;}
+  figcaption{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-soft); margin-top:6px;}
+  svg{width:100%; height:auto; display:block;}
+  svg text{font-family:"IBM Plex Mono",monospace; fill:var(--ink);}
+  .t10{font-size:10px;} .t11{font-size:11px;} .t12{font-size:12px; font-weight:500;}
+  .soft{fill:var(--ink-soft);}
+  .out{fill:none; stroke:var(--ink); stroke-width:2.4;}
+  .pc{fill:var(--wood-fill); stroke:var(--wood); stroke-width:1.4;}
+  .ln{stroke:var(--ink); stroke-width:1.2; fill:none;}
+  .dash{stroke-dasharray:6 4;}
+  .fixl{stroke:var(--blue); fill:none;}
+  .mur{fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2;}
+  .dim{stroke:var(--ink-soft); stroke-width:1;}
+  .dimt{font-size:10px; fill:var(--ink-soft);}
+  .hlz{fill:none; stroke:var(--red); stroke-width:1.6;}
+  .notes{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-top:18px;}
+  .note{border-left:3px solid var(--wood); padding:2px 0 2px 12px; font-size:13.5px;}
+  .note.b{border-color:var(--blue);} .note.r{border-color:var(--red);}
+  .note strong{display:block; font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:2px; font-weight:500;}
+  table{border-collapse:collapse; width:100%; font-size:13px; font-variant-numeric:tabular-nums; margin-top:14px;}
+  th,td{border:1px solid var(--line); padding:6px 9px; text-align:left; vertical-align:top;}
+  th{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.07em; text-transform:uppercase;
+    font-weight:500; color:var(--ink-soft); background:var(--blue-soft);}
+  p.lede{font-size:14.5px; max-width:64ch; color:var(--ink-soft); margin:0 0 22px;}
+  h3{font-family:Archivo,sans-serif; font-size:15px; margin:20px 0 6px;}
+  ul{font-size:13.5px; padding-left:20px; margin:6px 0;}
+  li{margin-bottom:4px;}
+</style>
+
+<div class="wrap">
+<header class="carimbo">
+  <div>
+    <h1>Marcenaria Opção E</h1>
+    <div style="font-size:13.5px;color:var(--ink-soft);margin-top:4px">Projeto executivo · escritório home 3,55 × 2,70 m · execução em 4 fases</div>
+  </div>
+  <div class="meta">
+    CLIENTE <strong>Israel Melicio</strong> · DATA <strong>29 SET 2026</strong><br>
+    FOLHAS <strong>M00–M04</strong> · REV <strong>0</strong> · cotas em <strong>mm</strong><br>
+    Ref. layout: <strong>Folha 07 (Opção E, rev 18)</strong>
+  </div>
+</header>
+
+<p class="lede">Caderno para orçamento e fabricação, <b>um móvel por fase</b>: Fase 1 — Credenza Game · Fase 2 — Biblioteca · Fase 3 — Bancada Dev · Fase 4 — Porta de correr. As <b>medidas externas são vinculantes</b>; o método construtivo e as listas de corte são referência — o marceneiro pode adaptar mantendo as externas e os vãos internos indicados. O sofá é item comprado (fora do escopo).</p>
+
+<!-- ================= M00 ================= -->
+<section class="folha">
+  <div class="folha-head"><h2>Capa — ambiente, restrições e especificação geral</h2><span class="folha-num">FOLHA M00</span></div>
+  <h3>O ambiente</h3>
+  <ul>
+    <li>Sala 3550 × 2700 mm, pé-direito 2640, sanca de gesso no perímetro (projeção a conferir in loco).</li>
+    <li>Piso vinílico existente — <b>não será alterado; nenhum cabo cruza o piso</b>.</li>
+    <li>Paredes de referência: NW (do AC) recebe a credenza; SW (da porta) recebe a biblioteca; NE (da janela) recebe a bancada.</li>
+  </ul>
+  <h3>Restrições de fabricação/instalação</h3>
+  <ul>
+    <li><b>Mureta do AC</b> na parede NW: saliência de 1060 larg × 980 alt × 70 prof, no trecho <b>2480–3540 medido da parede da porta</b>. Contém a tubulação do ar-condicionado: <b>proibido furar/fixar nela</b>. A credenza recebe recortes (detalhe na Fase 1).</li>
+    <li>Regra da janela: nenhum móvel acima de <b>1200 mm</b> de altura no entorno da janela (a credenza tem 1150 ✓).</li>
+    <li>Split do AC entre 2190 e 2490 do piso na parede NW — livre acima da credenza.</li>
+  </ul>
+  <h3>Especificação geral de material e acabamento</h3>
+  <ul>
+    <li>Corpo e frentes: <b>MDF 18 mm amadeirado claro (padrão freijó/carvalho), dupla-face</b>, fita de borda no mesmo padrão em todas as bordas aparentes.</li>
+    <li>Interior dos nichos da credenza: <b>MDF escuro contrastante</b> (padrão grafite/nogueira escura) — fundo e faces internas visíveis.</li>
+    <li>Fundos: MDF 6 mm; na credenza o fundo é <b>recuado 75 mm</b> (vão técnico de cabos entre fundo e parede).</li>
+    <li>Tampos de trabalho (bancada): MDF 25 mm.</li>
+    <li>Ferragens: corrediças telescópicas, sapatas niveladoras, passa-cabos ø60 c/ acabamento, cantoneiras/fixação anti-tombamento.</li>
+  </ul>
+  <table>
+    <tr><th>Fase</th><th>Móvel</th><th>Medidas externas (L×P×A)</th><th>Parede / posição</th></tr>
+    <tr><td><b>1</b></td><td>Credenza Game</td><td>2000 × 450 × 1150</td><td>NW, centralizada: de 775 a 2775 da parede da porta</td></tr>
+    <tr><td><b>2</b></td><td>Biblioteca</td><td>1720 × 350 × 2400</td><td>SW, do canto NW até 20 mm antes do vão da porta</td></tr>
+    <tr><td><b>3</b></td><td>Bancada Dev</td><td>2000 × 700 × 750*</td><td>NE, de 700 a 2700 do canto norte (*conferir 750×800)</td></tr>
+    <tr><td><b>4</b></td><td>Porta de correr</td><td>vão 840 × 2160 · folha ~900 × 2200</td><td>SW, trilho externo pelo corredor</td></tr>
+  </table>
+</section>
+
+<!-- ================= M01 — FASE 1 CREDENZA ================= -->
+<section class="folha">
+  <div class="folha-head"><h2>Fase 1 — Credenza Game 2000 × 450 × 1150</h2><span class="folha-num">FOLHA M01</span></div>
+  <figure><svg viewBox="0 0 780 470" role="img" aria-label="Elevação frontal da credenza com cotas">
+    <!-- cotas superiores: zonas -->
+    <line class="dim" x1="80" y1="24" x2="680" y2="24"/>
+    <line class="dim" x1="80" y1="18" x2="80" y2="30"/><line class="dim" x1="260" y1="18" x2="260" y2="30"/>
+    <line class="dim" x1="500" y1="18" x2="500" y2="30"/><line class="dim" x1="680" y1="18" x2="680" y2="30"/>
+    <text class="dimt" x="170" y="20" text-anchor="middle">600</text>
+    <text class="dimt" x="380" y="20" text-anchor="middle">800</text>
+    <text class="dimt" x="590" y="20" text-anchor="middle">600</text>
+    <!-- corpo -->
+    <rect class="out" x="80" y="45" width="600" height="345"/>
+    <line class="ln" x1="85.4" y1="50" x2="85.4" y2="377"/>
+    <line class="ln" x1="674.6" y1="50" x2="674.6" y2="377"/>
+    <rect class="pc" x="257" y="50" width="6" height="327"/>
+    <rect class="pc" x="497" y="50" width="6" height="327"/>
+    <line class="ln" x1="85" y1="377" x2="675" y2="377"/>
+    <line class="ln" x1="85" y1="50.4" x2="675" y2="50.4"/>
+    <!-- prateleiras flancos -->
+    <rect class="pc" x="85.4" y="266.4" width="171.6" height="5.4"/>
+    <rect class="pc" x="503" y="266.4" width="171.6" height="5.4"/>
+    <rect class="pc" x="85.4" y="155.7" width="171.6" height="5.4"/>
+    <rect class="pc" x="503" y="155.7" width="171.6" height="5.4"/>
+    <!-- gavetões -->
+    <rect class="pc" x="263" y="323.1" width="234" height="54"/>
+    <rect class="pc" x="263" y="268.5" width="234" height="54"/>
+    <line class="ln" x1="360" y1="350" x2="400" y2="350"/>
+    <line class="ln" x1="360" y1="295" x2="400" y2="295"/>
+    <!-- baia + LG -->
+    <rect class="fixl dash" x="288" y="105" width="184" height="158" stroke-width="1.4"/>
+    <text class="t10 soft" x="380" y="188" text-anchor="middle">LG 27″ (612×526)</text>
+    <!-- passa-cabos -->
+    <circle class="ln" cx="171" cy="370" r="6"/><circle class="ln" cx="171" cy="260" r="6"/><circle class="ln" cx="171" cy="149" r="6"/>
+    <circle class="ln" cx="589" cy="370" r="6"/><circle class="ln" cx="589" cy="260" r="6"/><circle class="ln" cx="589" cy="149" r="6"/>
+    <!-- sapatas -->
+    <line class="ln dash" x1="80" y1="390" x2="680" y2="390" stroke-width="1"/>
+    <text class="t10 soft" x="700" y="393">sapatas 25</text>
+    <!-- cotas -->
+    <line class="dim" x1="80" y1="420" x2="680" y2="420"/>
+    <line class="dim" x1="80" y1="414" x2="80" y2="426"/><line class="dim" x1="680" y1="414" x2="680" y2="426"/>
+    <text class="dimt" x="380" y="437" text-anchor="middle">2000</text>
+    <line class="dim" x1="52" y1="45" x2="52" y2="390"/>
+    <line class="dim" x1="46" y1="45" x2="58" y2="45"/><line class="dim" x1="46" y1="390" x2="58" y2="390"/>
+    <text class="dimt" x="38" y="222" text-anchor="middle" transform="rotate(-90 38 222)">1150</text>
+    <line class="dim" x1="706" y1="50.4" x2="706" y2="155.7"/>
+    <text class="dimt" x="714" y="106" text-anchor="start">vão 351</text>
+    <line class="dim" x1="706" y1="161.1" x2="706" y2="266.4"/>
+    <text class="dimt" x="714" y="218" text-anchor="start">vão 351</text>
+    <line class="dim" x1="706" y1="271.8" x2="706" y2="377"/>
+    <text class="dimt" x="714" y="328" text-anchor="start">vão 351</text>
+    <text class="t10 soft" x="380" y="317" text-anchor="middle">gavetões: frentes 778×178 (2×)</text>
+    <text class="t11" x="171" y="70" text-anchor="middle">3 nichos int. 573×351</text>
+    <text class="t11" x="589" y="70" text-anchor="middle">3 nichos int. 573×351</text>
+  </svg><figcaption>Elevação frontal · esc. livre · ○ = passa-cabo ø60 no fundo de cada nicho · interior dos nichos em MDF escuro</figcaption></figure>
+
+  <figure><svg viewBox="0 0 780 240" role="img" aria-label="Corte lateral e detalhe da mureta">
+    <!-- corte lateral -->
+    <rect class="out" x="70" y="30" width="135" height="172"/>
+    <line class="ln" x1="172.5" y1="35" x2="172.5" y2="197"/>
+    <text class="t10" x="120" y="70">prof. útil 369</text>
+    <text class="t10 soft" x="120" y="86">fundo 6 recuado 75</text>
+    <line class="dim" x1="70" y1="222" x2="205" y2="222"/>
+    <text class="dimt" x="137" y="236" text-anchor="middle">450</text>
+    <text class="t10 soft" x="212" y="120" text-anchor="start">← parede NW</text>
+    <!-- detalhe mureta (vista de trás) -->
+    <rect class="out" x="380" y="30" width="300" height="172"/>
+    <rect class="mur" x="532" y="118" width="148" height="84"/>
+    <text class="t10" x="606" y="150" text-anchor="middle" fill="var(--blue)">MURETA 70 prof</text>
+    <text class="t10" x="606" y="165" text-anchor="middle" fill="var(--blue)">trecho 1705–2000 · h até 980</text>
+    <rect class="hlz" x="666" y="118" width="14" height="84"/>
+    <text class="t11" x="386" y="50">VISTA TRASEIRA — recortes:</text>
+    <text class="t10 soft" x="386" y="66">lateral dir.: recorte 70×980 no canto</text>
+    <text class="t10 soft" x="386" y="80">base/travessas: recorte 70 nos últ. 295</text>
+    <text class="t10 soft" x="386" y="94">fundo recuado 75 passa livre da mureta</text>
+  </svg><figcaption>Corte lateral + vista traseira com os recortes da mureta (vermelho = lateral direita)</figcaption></figure>
+
+  <h3>Lista de corte — referência (MDF 18 amadeirado, salvo indicação)</h3>
+  <table>
+    <tr><th>Peça</th><th>Medida (mm)</th><th>Qtd</th><th>Obs</th></tr>
+    <tr><td>Tampo</td><td>2000 × 450</td><td>1</td><td>sobreposto às laterais</td></tr>
+    <tr><td>Laterais</td><td>1107 × 450</td><td>2</td><td><b>direita: recorte traseiro 70×980</b></td></tr>
+    <tr><td>Base</td><td>1964 × 444</td><td>1</td><td>recorte 70 prof. nos últimos 295 (lado dir.)</td></tr>
+    <tr><td>Divisórias verticais</td><td>1089 × 375</td><td>2</td><td>até o fundo recuado</td></tr>
+    <tr><td>Prateleiras dos flancos</td><td>573 × 369</td><td>4</td><td>fixas, interior escuro</td></tr>
+    <tr><td>Piso da baia (topo dos gavetões)</td><td>782 × 369</td><td>1</td><td></td></tr>
+    <tr><td>Frentes de gavetão</td><td>778 × 178</td><td>2</td><td>folga 2 mm por lado</td></tr>
+    <tr><td>Caixas de gaveta (15 mm)</td><td>int. ~730 × 350 × 140</td><td>2</td><td>fundo 6 mm</td></tr>
+    <tr><td>Fundo (6 mm, escuro)</td><td>1964 × 1089</td><td>1</td><td>recuado 75; pode ser em 2 peças</td></tr>
+    <tr><td>Travessas de fixação</td><td>1964 × 100</td><td>2</td><td>sup./inf.; inferior c/ recorte da mureta</td></tr>
+  </table>
+  <div class="notes">
+    <div class="note b"><strong>Elétrica e cabos</strong>Passa-cabo ø60 no fundo de cada nicho e da baia; vão técnico de 75 atrás do fundo leva os cabos à régua (fixada na travessa, nunca na mureta). No trecho da mureta os cabos passam por cima dela.</div>
+    <div class="note"><strong>Ventilação</strong>Consoles ficam ligados: rasgo de ventilação de 30 mm na parte alta do fundo de cada nicho ou fundo perfurado na faixa superior.</div>
+    <div class="note r"><strong>Instalação</strong>Posição: de 775 a 2775 da parede da porta. Nivelar pelas sapatas; fixação à parede pelas travessas <b>fora do trecho 2480–3540</b> (mureta — não furar).</div>
+  </div>
+</section>
+
+<!-- ================= M02 — FASE 2 BIBLIOTECA ================= -->
+<section class="folha">
+  <div class="folha-head"><h2>Fase 2 — Biblioteca 1720 × 350 × 2400</h2><span class="folha-num">FOLHA M02</span></div>
+  <figure><svg viewBox="0 0 620 600" role="img" aria-label="Elevação frontal da biblioteca">
+    <rect class="out" x="110" y="40" width="344" height="480"/>
+    <line class="ln" x1="113.6" y1="44" x2="113.6" y2="508"/>
+    <line class="ln" x1="450.4" y1="44" x2="450.4" y2="508"/>
+    <rect class="pc" x="280" y="44" width="4" height="460"/>
+    <line class="ln" x1="112" y1="504" x2="452" y2="504"/>
+    <line class="ln" x1="112" y1="508" x2="452" y2="508"/>
+    <line class="ln" x1="112" y1="43.6" x2="452" y2="43.6"/>
+    <rect class="pc" x="113.6" y="430.6" width="166.4" height="3.6"/><rect class="pc" x="284" y="430.6" width="166.4" height="3.6"/>
+    <rect class="pc" x="113.6" y="353.2" width="166.4" height="3.6"/><rect class="pc" x="284" y="353.2" width="166.4" height="3.6"/>
+    <rect class="pc" x="113.6" y="275.8" width="166.4" height="3.6"/><rect class="pc" x="284" y="275.8" width="166.4" height="3.6"/>
+    <rect class="pc" x="113.6" y="198.4" width="166.4" height="3.6"/><rect class="pc" x="284" y="198.4" width="166.4" height="3.6"/>
+    <rect class="pc" x="113.6" y="121" width="166.4" height="3.6"/><rect class="pc" x="284" y="121" width="166.4" height="3.6"/>
+    <line class="dim" x1="110" y1="545" x2="454" y2="545"/>
+    <line class="dim" x1="110" y1="539" x2="110" y2="551"/><line class="dim" x1="454" y1="539" x2="454" y2="551"/>
+    <text class="dimt" x="282" y="562" text-anchor="middle">1720</text>
+    <line class="dim" x1="82" y1="40" x2="82" y2="520"/>
+    <line class="dim" x1="76" y1="40" x2="88" y2="40"/><line class="dim" x1="76" y1="520" x2="88" y2="520"/>
+    <text class="dimt" x="68" y="284" text-anchor="middle" transform="rotate(-90 68 284)">2400</text>
+    <line class="dim" x1="478" y1="126" x2="478" y2="198"/>
+    <text class="dimt" x="486" y="166" text-anchor="start">vão 369 (típ.)</text>
+    <text class="t10 soft" x="196" y="70" text-anchor="middle">vão int. 833</text>
+    <text class="t10 soft" x="368" y="70" text-anchor="middle">vão int. 833</text>
+    <text class="t10 soft" x="282" y="518" text-anchor="middle">rodapé 60</text>
+  </svg><figcaption>Elevação frontal · 5 prateleiras por vão (furação p/ regulagem em linha) · prof. 350, fundo 6 mm</figcaption></figure>
+  <h3>Lista de corte — referência</h3>
+  <table>
+    <tr><th>Peça</th><th>Medida (mm)</th><th>Qtd</th><th>Obs</th></tr>
+    <tr><td>Laterais</td><td>2400 × 350</td><td>2</td><td></td></tr>
+    <tr><td>Divisória central</td><td>2304 × 332</td><td>1</td><td>entre base e tampo</td></tr>
+    <tr><td>Tampo e base</td><td>1684 × 350</td><td>2</td><td></td></tr>
+    <tr><td>Prateleiras</td><td>833 × 320</td><td>10</td><td>reguláveis (suportes 5 mm)</td></tr>
+    <tr><td>Rodapé</td><td>1684 × 60</td><td>1</td><td>recuado 20</td></tr>
+    <tr><td>Fundo (6 mm)</td><td>1720 × 2340</td><td>1</td><td>em 2 peças ok</td></tr>
+  </table>
+  <div class="notes">
+    <div class="note r"><strong>Instalação</strong>Parede SW, encostada no canto NW; termina 20 mm antes do vão da porta. <b>Fixação anti-tombamento obrigatória</b> (2 pontos na parede). Topo a 2400: conferir projeção da sanca antes da fabricação (teto 2640).</div>
+    <div class="note"><strong>Capacidade</strong>10 vãos de 833 × 369 ≈ 8,3 m lineares de livros — acervo completo da estante atual cabe com folga.</div>
+  </div>
+</section>
+
+<!-- ================= M03 — FASE 3 BANCADA ================= -->
+<section class="folha">
+  <div class="folha-head"><h2>Fase 3 — Bancada Dev 2000 × 700 × 750*</h2><span class="folha-num">FOLHA M03</span></div>
+  <figure><svg viewBox="0 0 660 330" role="img" aria-label="Planta e elevação da bancada">
+    <text class="t11" x="80" y="30">PLANTA</text>
+    <rect class="out" x="80" y="40" width="500" height="175"/>
+    <rect class="pc" x="86" y="46" width="7" height="163"/>
+    <rect class="pc" x="567" y="46" width="7" height="163"/>
+    <circle class="ln" cx="230" cy="62" r="7"/><circle class="ln" cx="430" cy="62" r="7"/>
+    <text class="t10 soft" x="330" y="66" text-anchor="middle">passa-cabos ø60</text>
+    <line class="dim" x1="80" y1="238" x2="580" y2="238"/>
+    <line class="dim" x1="80" y1="232" x2="80" y2="244"/><line class="dim" x1="580" y1="232" x2="580" y2="244"/>
+    <text class="dimt" x="330" y="254" text-anchor="middle">2000</text>
+    <line class="dim" x1="604" y1="40" x2="604" y2="215"/>
+    <text class="dimt" x="614" y="130" text-anchor="start">700</text>
+    <text class="t11" x="80" y="286">ELEVAÇÃO</text>
+    <rect class="out" x="80" y="292" width="500" height="10"/>
+    <rect class="pc" x="86" y="302" width="7" height="24"/>
+    <rect class="pc" x="567" y="302" width="7" height="24"/>
+    <line class="ln dash" x1="100" y1="306" x2="560" y2="306"/>
+    <text class="t10 soft" x="330" y="320" text-anchor="middle">travessa traseira 1900×120 · h 750* (mesa atual = 800 — CONFIRMAR antes do corte)</text>
+  </svg><figcaption>Tampo 25 mm sobre 2 painéis laterais · parede NE (da janela), de 700 a 2700 do canto norte</figcaption></figure>
+  <h3>Lista de corte — referência</h3>
+  <table>
+    <tr><th>Peça</th><th>Medida (mm)</th><th>Qtd</th><th>Obs</th></tr>
+    <tr><td>Tampo (25 mm)</td><td>2000 × 700</td><td>1</td><td>2 furos passa-cabo ø60 junto à parede</td></tr>
+    <tr><td>Painéis laterais (25 mm)</td><td>725 × 680</td><td>2</td><td></td></tr>
+    <tr><td>Travessa traseira</td><td>1900 × 120</td><td>1</td><td>rigidez + fixação à parede</td></tr>
+  </table>
+  <div class="notes">
+    <div class="note r"><strong>Altura</strong>Projeto em 750 (padrão ergonômico). A mesa atual tem 800 — <b>Israel confirma 750 ou 800 antes do corte</b>.</div>
+    <div class="note"><strong>Embaixo</strong>Gaveteiro móvel e no-break existentes — nada a fabricar. Extremidade sul = zona da impressora.</div>
+  </div>
+</section>
+
+<!-- ================= M04 — FASE 4 PORTA ================= -->
+<section class="folha">
+  <div class="folha-head"><h2>Fase 4 — Porta de correr (vão 840 × 2160)</h2><span class="folha-num">FOLHA M04</span></div>
+  <figure><svg viewBox="0 0 620 470" role="img" aria-label="Elevação do vão com porta de correr pelo corredor">
+    <line class="ln" x1="60" y1="440" x2="580" y2="440"/>
+    <rect class="out" x="330" y="94" width="134" height="346"/>
+    <text class="t10 soft" x="397" y="270" text-anchor="middle">VÃO 840×2160</text>
+    <rect class="fixl dash" x="176" y="88" width="144" height="352" stroke-width="1.6"/>
+    <text class="t10" x="248" y="270" text-anchor="middle" fill="var(--blue)">FOLHA ~900×2200</text>
+    <text class="t10" x="248" y="288" text-anchor="middle" fill="var(--blue)">(posição aberta)</text>
+    <line class="ln" x1="140" y1="76" x2="500" y2="76" stroke-width="3"/>
+    <text class="t10 soft" x="320" y="66" text-anchor="middle">trilho ≥1850 · lado do CORREDOR</text>
+    <line class="dim" x1="330" y1="456" x2="464" y2="456"/>
+    <text class="dimt" x="397" y="468" text-anchor="middle">840</text>
+    <line class="dim" x1="488" y1="94" x2="488" y2="440"/>
+    <text class="dimt" x="498" y="270" text-anchor="start">2160</text>
+  </svg><figcaption>Vista do lado do corredor · folha desliza p/ a esquerda (sentido oposto ao interruptor)</figcaption></figure>
+  <h3>Especificação</h3>
+  <ul>
+    <li>Folha: MDF 22–25 mm no acabamento do caderno (amadeirado claro) ou laqueada como a porta atual — <b>~900 × 2200</b> (transpasse de 30 por lado; altura cobre o vão + trilho).</li>
+    <li>Kit de correr <b>externo, instalado pelo lado do corredor</b>: trilho aparente ou perfil embutido em rasgo, roldanas c/ rolamento, <b>amortecedores nas duas pontas</b>, guia inferior de piso sem furar o piso da sala.</li>
+    <li>Puxador-cava embutido nas duas faces; batedor de borracha.</li>
+    <li>Conferir in loco: parede do corredor livre ≥ 950 ao lado do vão p/ a folha aberta; posição de interruptores/quadros do corredor.</li>
+    <li>Alternativa descartada: porta-cassete embutida (exigiria obra na parede). Correr por dentro da sala é <b>inviável</b> (colide com a biblioteca).</li>
+    <li>A porta e o batente atuais são removidos; requadrar o vão.</li>
+  </ul>
+</section>
+
+<section class="folha">
+  <div class="folha-head"><h2>Checklist antes de fabricar</h2><span class="folha-num">RESUMO</span></div>
+  <ul>
+    <li>☐ Conferir in loco: projeção da sanca (Fase 2), altura da bancada 750×800 (Fase 3), espaço do corredor (Fase 4).</li>
+    <li>☐ Validar amostra do MDF amadeirado claro + interior escuro dos nichos.</li>
+    <li>☐ Elétrica da credenza: pontos/régua definidos com o marceneiro antes da furação do fundo.</li>
+    <li>☐ Mureta do AC: reforçar com o instalador — <b>nenhum parafuso no trecho 2480–3540 abaixo de 980</b>.</li>
+    <li>☐ Ordem de execução: Fase 1 → 2 → 3 → 4; mesa e estante atuais permanecem em uso até as fases 2–3.</li>
+  </ul>
+</section>
+</div>
