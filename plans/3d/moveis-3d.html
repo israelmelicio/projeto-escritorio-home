@@ -1312,8 +1312,8 @@ function bancada(){
 // ---------- PORTA DE CORRER (folha 900×2200 + trilho) ----------
 function porta(){
   const g = new THREE.Group();
-  B(g, 0, 0.02, 0.90, 0.028, 2.20, 0.012, M.wood);             // folha
-  B(g, 0.10, 0.04, 0.012, 0.006, 0.28, 1.00, M.woodIn);        // puxador-cava
+  B(g, 0, 0.02, 1.00, 0.060, 2.20, 0.012, M.wood);             // folha sanduíche ~60 mm
+  B(g, 0.10, 0.072, 0.012, 0.006, 0.28, 1.00, M.woodIn);       // puxador-cava
   B(g, -0.475, 0.005, 1.85, 0.05, 0.06, 2.24, M.black);        // trilho ≥1850
   B(g, 0.18, 0.028, 0.03, 0.02, 0.05, 2.20, M.black);          // roldana 1
   B(g, 0.70, 0.028, 0.03, 0.02, 0.05, 2.20, M.black);          // roldana 2
@@ -1328,7 +1328,7 @@ const DESCS = {
   Cr: "Credenza Game 2000×450×1150 — 6 nichos (int. 573×351), 2 gavetões, CRT 570×480×360 na baia (piso reforçado) e LG 27″ sobre o tampo ao centro. Gire p/ trás: painel técnico removível c/ SCART 6×1, AV 6×1, HDMI 6×1, GBS-Control e régua. Lateral direita c/ recorte 70×980 da mureta.",
   Bi: "Biblioteca 1720×350×2400 — 2 vãos de 833 c/ 5 prateleiras reguláveis (vão 369), rodapé 60, fundo escuro. Fixação anti-tombamento na parede.",
   Ba: "Bancada Dev 2000×700×750* — tampo 25 mm, painéis laterais, travessa traseira, 2 furos passa-cabo ø60. *Conferir 750×800 antes do corte.",
-  Po: "Porta de correr — folha ~900×2200, trilho externo ≥1850 pelo lado do corredor, roldanas, guia inferior e puxador-cava."
+  Po: "Porta de correr INTERNA acústica — folha sanduíche 1000×2200×60 (2× MDF 15 + núcleo isolante, ~50 kg, kit ≥80 kg); corre atrás da biblioteca (afastada 110 da parede); batente c/ borracha magnética no fechamento, escovas no vão e drop seal na base."
 };
 const builders = {Cr: credenza, Bi: biblioteca, Ba: bancada, Po: porta};
 const CAM = {
