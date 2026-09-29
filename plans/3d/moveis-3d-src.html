@@ -1,0 +1,253 @@
+<meta charset="utf-8">
+<title>Móveis Opção E</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  html,body{height:100%;}
+  body{margin:0; background:#171512; color:#EDE8DF; font-family:"IBM Plex Sans",system-ui,sans-serif; overflow:hidden;}
+  #app{position:fixed; inset:0;}
+  canvas{display:block;}
+  header{position:fixed; top:0; left:0; right:0; z-index:10; display:flex; flex-wrap:wrap; align-items:center;
+    gap:10px 18px; padding:14px 18px; background:linear-gradient(#171512f2,#17151200); pointer-events:none;}
+  h1{font-family:Archivo,sans-serif; font-weight:800; font-size:18px; margin:0; letter-spacing:.01em;}
+  .btns{display:flex; gap:8px; pointer-events:auto; flex-wrap:wrap;}
+  .btns button{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500; letter-spacing:.05em;
+    color:#EDE8DF; background:#26221c; border:1px solid #4a4438; border-radius:6px; padding:7px 14px; cursor:pointer;}
+  .btns button:hover{border-color:#8a7a5e;}
+  .btns button.on{background:#C9A070; color:#1c1812; border-color:#C9A070;}
+  .btns button:focus-visible{outline:2px solid #7DA5E8; outline-offset:2px;}
+  #desc{font-size:12.5px; color:#A39B8D; max-width:600px; line-height:1.4;}
+  footer{position:fixed; bottom:0; left:0; right:0; z-index:10; display:flex; justify-content:space-between;
+    gap:16px; padding:12px 18px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:#8a8272;
+    background:linear-gradient(#17151200,#171512e6); pointer-events:none;}
+</style>
+<div id="app"></div>
+<header>
+  <h1>Móveis Opção E — 3D</h1>
+  <div class="btns">
+    <button id="bCr" class="on">CREDENZA</button>
+    <button id="bBi">BIBLIOTECA</button>
+    <button id="bBa">BANCADA</button>
+    <button id="bPo">PORTA</button>
+  </div>
+  <div id="desc"></div>
+</header>
+<footer>
+  <span>arraste = girar · scroll = zoom · gire p/ trás da credenza p/ ver o painel técnico A/V</span>
+  <span>cotas do caderno de marcenaria · silhueta = 1,75 m</span>
+</footer>
+<script src="three.min.js"></script>
+<script src="OrbitControls.js"></script>
+<script>
+(function(){
+'use strict';
+const app = document.getElementById('app');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x171512);
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.02, 60);
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputEncoding = THREE.sRGBEncoding;
+app.appendChild(renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI * 0.55;
+
+scene.add(new THREE.HemisphereLight(0xfff2dd, 0x3a332a, 0.9));
+const sun = new THREE.DirectionalLight(0xffe9c8, 0.85);
+sun.position.set(3.5, 5, 3);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.left = -3; sun.shadow.camera.right = 3;
+sun.shadow.camera.top = 4;  sun.shadow.camera.bottom = -2;
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0xcfd8e8, 0.3);
+fill.position.set(-3, 3, -3);
+scene.add(fill);
+
+const M = {
+  wood  : new THREE.MeshStandardMaterial({color:0x9a7a52, roughness:0.55}),   // MDF amadeirado claro
+  woodIn: new THREE.MeshStandardMaterial({color:0x1f1913, roughness:0.85}),   // interior escuro
+  top25 : new THREE.MeshStandardMaterial({color:0x8f7048, roughness:0.5}),
+  black : new THREE.MeshStandardMaterial({color:0x1c1c1f, roughness:0.5}),
+  white : new THREE.MeshStandardMaterial({color:0xf6f4ef, roughness:0.45}),
+  device: new THREE.MeshStandardMaterial({color:0x33343a, roughness:0.55}),
+  screen: new THREE.MeshStandardMaterial({color:0x0e1218, roughness:0.25}),
+  metal : new THREE.MeshStandardMaterial({color:0xcfd2d6, roughness:0.35, metalness:0.6}),
+  ghost : new THREE.MeshStandardMaterial({color:0x9aa2ad, roughness:0.9, transparent:true, opacity:0.22}),
+  floor : new THREE.MeshStandardMaterial({color:0x241f19, roughness:0.95}),
+};
+
+function B(g, x, z, w, d, h, y0, mat){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  m.position.set(x + w/2, y0 + h/2, z + d/2);
+  m.castShadow = true; m.receiveShadow = true;
+  g.add(m); return m;
+}
+function lg(g, x, y0, z){ // LG 27": base + coluna + painel 612×430
+  B(g, x+0.19, z, 0.24, 0.16, 0.02, y0, M.black);
+  B(g, x+0.28, z+0.05, 0.05, 0.04, 0.10, y0+0.02, M.black);
+  B(g, x, z+0.10, 0.612, 0.035, 0.43, y0+0.10, M.screen);
+}
+function person(g, x){ // silhueta 1,75 m
+  const body = new THREE.Mesh(new THREE.CapsuleGeometry ? new THREE.CapsuleGeometry(0.16,1.1,4,12) : new THREE.CylinderGeometry(0.16,0.18,1.4,14), M.ghost);
+  body.position.set(x, 0.85, 0); g.add(body);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.11, 16, 12), M.ghost);
+  head.position.set(x, 1.63, 0); g.add(head);
+}
+
+// piso e grade
+const ground = new THREE.Mesh(new THREE.CircleGeometry(4.5, 48), M.floor);
+ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+const grid = new THREE.GridHelper(9, 18, 0x3a342c, 0x2a251f);
+grid.position.y = 0.001; scene.add(grid);
+
+// ---------- CREDENZA 2000×450×1150 ----------
+function credenza(){
+  const g = new THREE.Group();
+  [[0.06,0.05],[1.90,0.05],[0.06,0.36],[1.90,0.36]].forEach(p=>B(g,p[0],p[1],0.05,0.05,0.025,0,M.black)); // sapatas
+  B(g, 0.018, 0, 1.964, 0.444, 0.018, 0.025, M.wood);          // base
+  B(g, 0, 0, 0.018, 0.45, 1.107, 0.025, M.wood);               // lateral esq
+  B(g, 1.982, 0.07, 0.018, 0.38, 1.107, 0.025, M.wood);        // lateral dir (recorte da mureta atrás)
+  B(g, 1.982, 0, 0.018, 0.07, 0.127, 1.005, M.wood);           // lateral dir acima do recorte
+  B(g, 0, 0, 2.0, 0.45, 0.018, 1.132, M.wood);                 // tampo
+  B(g, 0.582, 0.075, 0.018, 0.375, 1.089, 0.043, M.wood);      // divisória 1
+  B(g, 1.4, 0.075, 0.018, 0.375, 1.089, 0.043, M.wood);        // divisória 2
+  // prateleiras dos flancos
+  [[0.018,0.564],[1.418,0.564]].forEach(f=>{
+    B(g, f[0], 0.081, f[1], 0.369, 0.018, 0.394, M.wood);
+    B(g, f[0], 0.081, f[1], 0.369, 0.018, 0.763, M.wood);
+  });
+  // fundo escuro (flancos + zona dos gavetões) — recuado 75 da parede
+  B(g, 0.018, 0.069, 0.564, 0.006, 1.089, 0.043, M.woodIn);
+  B(g, 1.418, 0.069, 0.564, 0.006, 1.089, 0.043, M.woodIn);
+  B(g, 0.6, 0.069, 0.8, 0.006, 0.38, 0.043, M.woodIn);
+  // painel técnico 18 mm atrás da baia (removível)
+  B(g, 0.609, 0.057, 0.782, 0.018, 0.709, 0.423, M.wood);
+  // aparelhos na face traseira do painel (visíveis por trás)
+  B(g, 0.66, 0.012, 0.30, 0.045, 0.08, 0.94, M.device);        // SCART 6×1
+  B(g, 0.66, 0.012, 0.30, 0.045, 0.08, 0.80, M.device);        // AV 6×1
+  B(g, 1.06, 0.027, 0.24, 0.030, 0.06, 0.95, M.black);         // HDMI 6×1
+  B(g, 1.06, 0.017, 0.16, 0.040, 0.12, 0.72, M.device);        // GBS-Control
+  B(g, 0.65, 0.012, 0.66, 0.045, 0.06, 0.50, M.black);         // régua 12
+  // piso da baia + gavetões
+  B(g, 0.6, 0.081, 0.8, 0.369, 0.018, 0.405, M.wood);
+  B(g, 0.611, 0.45, 0.778, 0.018, 0.178, 0.045, M.wood);
+  B(g, 0.611, 0.45, 0.778, 0.018, 0.178, 0.227, M.wood);
+  B(g, 0.93, 0.468, 0.14, 0.006, 0.008, 0.21, M.woodIn);       // cava gav 1
+  B(g, 0.93, 0.468, 0.14, 0.006, 0.008, 0.392, M.woodIn);      // cava gav 2
+  lg(g, 0.694, 0.423, 0.20);
+  B(g, 0.12, 0.10, 0.092, 0.26, 0.39, 1.15, M.white);          // PS5
+  B(g, 0.30, 0.12, 0.15, 0.15, 0.30, 1.15, M.black);           // Series X
+  B(g, 1.72, 0.15, 0.11, 0.22, 0.11, 1.15, M.device);          // Switch dock
+  person(g, -0.55);
+  g.position.set(-1.0, 0, -0.225);
+  return g;
+}
+
+// ---------- BIBLIOTECA 1720×350×2400 ----------
+function biblioteca(){
+  const g = new THREE.Group();
+  B(g, 0.018, 0.02, 1.684, 0.33, 0.06, 0, M.wood);             // rodapé
+  B(g, 0.018, 0, 1.684, 0.35, 0.018, 0.06, M.wood);            // base
+  B(g, 0, 0, 0.018, 0.35, 2.4, 0, M.wood);                     // lateral esq
+  B(g, 1.702, 0, 0.018, 0.35, 2.4, 0, M.wood);                 // lateral dir
+  B(g, 0.018, 0, 1.684, 0.35, 0.018, 2.382, M.wood);           // tampo
+  B(g, 0.851, 0.018, 0.018, 0.332, 2.304, 0.078, M.wood);      // divisória central
+  [0.429, 0.816, 1.203, 1.59, 1.977].forEach(y=>{
+    B(g, 0.018, 0.03, 0.833, 0.32, 0.018, y, M.wood);
+    B(g, 0.869, 0.03, 0.833, 0.32, 0.018, y, M.wood);
+  });
+  B(g, 0.018, 0.012, 1.684, 0.006, 2.304, 0.078, M.woodIn);    // fundo escuro
+  // livros de referência em 3 vãos
+  const cols = [0xB05A3C, 0x3E5C76, 0x7A8450, 0xC9A227, 0x5C4B6B, 0x8a3a3a];
+  [[0.08,0.447],[0.93,0.834],[0.10,1.221]].forEach((s,k)=>{
+    for(let i=0;i<14;i++) B(g, s[0]+i*0.052, 0.06, 0.036, 0.21, 0.24+((i*7+k)%3)*0.03, s[1],
+      new THREE.MeshStandardMaterial({color:cols[(i+k)%6], roughness:0.85}));
+  });
+  person(g, -0.5);
+  g.position.set(-0.86, 0, -0.175);
+  return g;
+}
+
+// ---------- BANCADA 2000×700×750 ----------
+function bancada(){
+  const g = new THREE.Group();
+  B(g, 0, 0, 2.0, 0.70, 0.025, 0.725, M.top25);                // tampo 25
+  B(g, 0.02, 0.01, 0.025, 0.68, 0.725, 0, M.top25);            // painel esq
+  B(g, 1.955, 0.01, 0.025, 0.68, 0.725, 0, M.top25);           // painel dir
+  B(g, 0.045, 0.675, 1.91, 0.018, 0.12, 0.56, M.wood);         // travessa traseira
+  // furos passa-cabo
+  [0.6, 1.4].forEach(x=>{
+    const c = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.004, 24), M.woodIn);
+    c.position.set(x, 0.752, 0.08); g.add(c);
+  });
+  // referências de escala: Studio Display + MacBook
+  B(g, 0.70, 0.60, 0.623, 0.035, 0.43, 0.90, M.screen);
+  B(g, 0.94, 0.62, 0.16, 0.12, 0.14, 0.752, M.metal);
+  B(g, 1.35, 0.25, 0.32, 0.24, 0.02, 0.752, M.metal);
+  person(g, -0.55);
+  g.position.set(-1.0, 0, -0.35);
+  return g;
+}
+
+// ---------- PORTA DE CORRER (folha 900×2200 + trilho) ----------
+function porta(){
+  const g = new THREE.Group();
+  B(g, 0, 0.02, 0.90, 0.028, 2.20, 0.012, M.wood);             // folha
+  B(g, 0.10, 0.04, 0.012, 0.006, 0.28, 1.00, M.woodIn);        // puxador-cava
+  B(g, -0.475, 0.005, 1.85, 0.05, 0.06, 2.24, M.black);        // trilho ≥1850
+  B(g, 0.18, 0.028, 0.03, 0.02, 0.05, 2.20, M.black);          // roldana 1
+  B(g, 0.70, 0.028, 0.03, 0.02, 0.05, 2.20, M.black);          // roldana 2
+  const guide = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.02, 0.05), M.black);
+  guide.position.set(0.45, 0.01, 0.034); g.add(guide);         // guia inferior
+  person(g, -0.85);
+  g.position.set(-0.45, 0, -0.02);
+  return g;
+}
+
+const DESCS = {
+  Cr: "Credenza Game 2000×450×1150 — 6 nichos (int. 573×351, interior escuro), 2 gavetões, baia da LG. Gire p/ trás: painel técnico removível c/ SCART 6×1, AV 6×1, HDMI 6×1, GBS-Control e régua. Lateral direita c/ recorte 70×980 da mureta.",
+  Bi: "Biblioteca 1720×350×2400 — 2 vãos de 833 c/ 5 prateleiras reguláveis (vão 369), rodapé 60, fundo escuro. Fixação anti-tombamento na parede.",
+  Ba: "Bancada Dev 2000×700×750* — tampo 25 mm, painéis laterais, travessa traseira, 2 furos passa-cabo ø60. *Conferir 750×800 antes do corte.",
+  Po: "Porta de correr — folha ~900×2200, trilho externo ≥1850 pelo lado do corredor, roldanas, guia inferior e puxador-cava."
+};
+const builders = {Cr: credenza, Bi: biblioteca, Ba: bancada, Po: porta};
+const CAM = {
+  Cr: {pos:[2.4,1.5,2.6], tgt:[0,0.55,0]},
+  Bi: {pos:[2.4,1.9,3.0], tgt:[0,1.15,0]},
+  Ba: {pos:[2.3,1.5,2.6], tgt:[0,0.5,0]},
+  Po: {pos:[2.0,1.6,2.8], tgt:[0,1.1,0]},
+};
+let current = null;
+function show(k){
+  if(current){ scene.remove(current); }
+  current = builders[k]();
+  scene.add(current);
+  document.getElementById('desc').textContent = DESCS[k];
+  ['bCr','bBi','bBa','bPo'].forEach(id=>document.getElementById(id).classList.toggle('on', id === 'b'+k));
+  camera.position.set(...CAM[k].pos);
+  controls.target.set(...CAM[k].tgt);
+}
+document.getElementById('bCr').addEventListener('click', ()=>show('Cr'));
+document.getElementById('bBi').addEventListener('click', ()=>show('Bi'));
+document.getElementById('bBa').addEventListener('click', ()=>show('Ba'));
+document.getElementById('bPo').addEventListener('click', ()=>show('Po'));
+show('Cr');
+
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+addEventListener('resize', ()=>{
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+})();
+</script>
