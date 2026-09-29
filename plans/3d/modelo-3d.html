@@ -1429,8 +1429,10 @@ function optionE(){
   }
   B(g, 1.395, 0.451, 0.76, 0.004, 0.19, 0.08, M.woodDk);   // gavetão 1 (controles)
   B(g, 1.395, 0.451, 0.76, 0.004, 0.19, 0.30, M.woodDk);   // gavetão 2 (acessórios)
-  nichePlate(g, 1.395, 0.54, 0.76, 0.57, 0.451);           // baia da LG (recesso)
-  lgMonitor(g, 1.47, 0.56, 0.10);
+  nichePlate(g, 1.395, 0.54, 0.76, 0.57, 0.451);           // baia da CRT (recesso)
+  B(g, 1.49, 0.06, 0.57, 0.36, 0.48, 0.54, M.device);      // CRT na baia
+  B(g, 1.535, 0.421, 0.48, 0.006, 0.36, 0.60, M.screen);
+  lgMonitor(g, 1.47, 1.15, 0.12);                          // LG sobre o tampo, ao centro
   B(g, 0.90, 0.10, 0.092, 0.26, 0.39, 1.15, M.white);      // PS5 vertical no topo
   B(g, 1.13, 0.12, 0.15, 0.15, 0.30, 1.15, M.black);       // Series X
   B(g, 2.38, 0.15, 0.11, 0.22, 0.11, 1.15, M.device);      // Switch OLED dock
@@ -1460,7 +1462,7 @@ const DESCS = {
   B: "Parede arcade (38 nichos + CRT + LG, torre esquerda inteira de 110) · vitrine de mídias 107×15 (~8 m lineares), com respiro de 30 p/ a torre · prateleira p/ 10 livros · bancada dev 250 na sudeste, encostada na parede da janela.",
   C: "Sem coleção: credenza com LG + Series X, PS5 e Switch · biblioteca completa · bancada dev na parede da janela inteira (270) · sofá-cama Gênova 127×91 (abre p/ cama de casal 191 — cabe com folga de 34).",
   D: "Mesa em L e estante ATUAIS mantidas · parede arcade nova (torres 75+80 h200 + CRT + LG + ponte) · canto da janela: credenza baixa h115 (nada acima de 120 perto da janela) · vitrine de mídias 107×15.",
-  E: "Base na C: credenza game 200×45×h115 centralizada c/ 6 consoles retrô + PS5, Series X e Switch no topo · 2 gavetões p/ controles e acessórios · LG na baia central · biblioteca completa · bancada 200 (canto da janela livre) · sofá-cama Gênova · PORTA DE CORRER (trilho pelo corredor)."
+  E: "Base na C: credenza game 200×45×h115 centralizada c/ 6 consoles retrô + PS5, Series X e Switch · CRT na baia central (piso reforçado) · LG 27″ sobre o tampo · 2 gavetões p/ controles · biblioteca completa · bancada 200 · sofá-cama Gênova · PORTA DE CORRER (trilho pelo corredor)."
 };
 const builders = {A: optionA, B: optionB, C: optionC, D: optionD, E: optionE};
 let current = null;
