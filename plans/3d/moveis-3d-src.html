@@ -137,6 +137,12 @@ function credenza(){
   B(g, 1.06, 0.027, 0.24, 0.030, 0.06, 0.95, M.black);         // HDMI 6×1
   B(g, 1.06, 0.017, 0.16, 0.040, 0.12, 0.72, M.device);        // GBS-Control
   B(g, 0.65, 0.012, 0.66, 0.045, 0.06, 0.50, M.black);         // régua 12
+  // passa-cabos: ø60 no fundo de cada nicho, ø35 no piso da baia
+  const furoZ = (x,y)=>{ const c = new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,0.012,20), M.woodIn);
+    c.rotation.x = Math.PI/2; c.position.set(x, y, 0.077); g.add(c); };
+  [0.30, 1.70].forEach(x=>[0.11, 0.48, 0.85].forEach(y=>furoZ(x,y)));
+  [0.85, 1.15].forEach(x=>{ const c = new THREE.Mesh(new THREE.CylinderGeometry(0.0175,0.0175,0.012,16), M.woodIn);
+    c.position.set(x, 0.424, 0.20); g.add(c); });
   // piso da baia + gavetões
   B(g, 0.6, 0.081, 0.8, 0.369, 0.018, 0.405, M.wood);
   B(g, 0.611, 0.45, 0.778, 0.018, 0.178, 0.045, M.wood);
