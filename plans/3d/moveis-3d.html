@@ -28,6 +28,7 @@
     <button id="bBi">BIBLIOTECA</button>
     <button id="bBa">BANCADA</button>
     <button id="bPo">PORTA</button>
+    <button id="bIn">PORTA+BIBLIOTECA</button>
   </div>
   <div id="desc"></div>
 </header>
@@ -1189,6 +1190,8 @@ const M = {
   screen: new THREE.MeshStandardMaterial({color:0x0e1218, roughness:0.25}),
   metal : new THREE.MeshStandardMaterial({color:0xcfd2d6, roughness:0.35, metalness:0.6}),
   ghost : new THREE.MeshStandardMaterial({color:0x9aa2ad, roughness:0.9, transparent:true, opacity:0.22}),
+  wallG : new THREE.MeshStandardMaterial({color:0xd8d2c4, roughness:0.95, transparent:true, opacity:0.35}),
+  seal  : new THREE.MeshStandardMaterial({color:0xC8442C, roughness:0.6}),
   floor : new THREE.MeshStandardMaterial({color:0x241f19, roughness:0.95}),
 };
 
@@ -1203,11 +1206,12 @@ function lg(g, x, y0, z){ // LG 27": base + coluna + painel 612×430
   B(g, x+0.28, z+0.05, 0.05, 0.04, 0.10, y0+0.02, M.black);
   B(g, x, z+0.10, 0.612, 0.035, 0.43, y0+0.10, M.screen);
 }
-function person(g, x){ // silhueta 1,75 m
+function person(g, x, z){ // silhueta 1,75 m
+  z = z || 0;
   const body = new THREE.Mesh(new THREE.CapsuleGeometry ? new THREE.CapsuleGeometry(0.16,1.1,4,12) : new THREE.CylinderGeometry(0.16,0.18,1.4,14), M.ghost);
-  body.position.set(x, 0.85, 0); g.add(body);
+  body.position.set(x, 0.85, z); g.add(body);
   const head = new THREE.Mesh(new THREE.SphereGeometry(0.11, 16, 12), M.ghost);
-  head.position.set(x, 1.63, 0); g.add(head);
+  head.position.set(x, 1.63, z); g.add(head);
 }
 
 // piso e grade
@@ -1324,18 +1328,61 @@ function porta(){
   return g;
 }
 
+// ---------- INTEGRAÇÃO PORTA + BIBLIOTECA (parede SW, 2700) ----------
+function integracao(){
+  const g = new THREE.Group();
+  // parede SW fantasma com o vão da porta (840×2160, a 1740 do canto NW)
+  B(g, -0.05, -0.03, 1.79, 0.03, 2.64, 0, M.wallG);            // trecho até o vão
+  B(g, 2.58, -0.03, 0.17, 0.03, 2.64, 0, M.wallG);             // trecho do canto SE (120)
+  B(g, 1.74, -0.03, 0.84, 0.03, 0.48, 2.16, M.wallG);          // verga sobre o vão
+  // biblioteca afastada 110 da parede (cavidade-bolso)
+  B(g, 0, 0.11, 0.018, 0.35, 2.4, 0, M.wood);
+  B(g, 1.702, 0.11, 0.018, 0.35, 2.4, 0, M.wood);
+  B(g, 0.018, 0.13, 1.684, 0.33, 0.06, 0, M.wood);
+  B(g, 0.018, 0.11, 1.684, 0.35, 0.018, 0.06, M.wood);
+  B(g, 0.018, 0.11, 1.684, 0.35, 0.018, 2.382, M.wood);
+  B(g, 0.851, 0.11, 0.018, 0.332, 2.304, 0.078, M.wood);
+  [0.429, 0.816, 1.203, 1.59, 1.977].forEach(y=>{
+    B(g, 0.018, 0.13, 0.833, 0.32, 0.018, y, M.wood);
+    B(g, 0.869, 0.13, 0.833, 0.32, 0.018, y, M.wood);
+  });
+  B(g, 0.018, 0.122, 1.684, 0.006, 2.304, 0.078, M.woodIn);    // fundo (frente da cavidade)
+  // trilho a h≈2260 + tampão no trecho visível
+  B(g, 0.55, 0.015, 2.11, 0.05, 0.06, 2.26, M.black);
+  B(g, 1.70, 0.075, 0.96, 0.03, 0.12, 2.23, M.wood);           // tampão amadeirado sobre o vão
+  // folha sanduíche 1000×2200×60 — MEIO ABERTA: metade escondida atrás da biblioteca
+  B(g, 1.22, 0.025, 1.00, 0.06, 2.20, 0.012, M.wood);
+  B(g, 1.44, 0.018, 0.03, 0.02, 0.05, 2.212, M.black);         // roldana
+  B(g, 1.98, 0.018, 0.03, 0.02, 0.05, 2.212, M.black);         // roldana
+  B(g, 2.08, 0.088, 0.012, 0.006, 0.28, 1.00, M.woodIn);       // puxador-cava
+  B(g, 1.24, 0.03, 0.96, 0.05, 0.015, 0.002, M.seal);          // drop seal (base da folha)
+  // batente de fechamento no canto SE c/ borracha magnética (vermelho)
+  B(g, 2.60, 0.02, 0.06, 0.095, 2.22, 0, M.wood);
+  B(g, 2.594, 0.028, 0.006, 0.08, 2.16, 0.02, M.seal);
+  // escovas na boca da cavidade (entrada atrás da biblioteca)
+  B(g, 1.72, 0.02, 0.008, 0.095, 2.22, 0, M.seal);
+  // espaçadores anti-tombamento acima do trilho (h>2300)
+  B(g, 0.30, 0, 0.10, 0.11, 0.08, 2.34, M.wood);
+  B(g, 1.30, 0, 0.10, 0.11, 0.08, 2.34, M.wood);
+  person(g, 2.16, 0.85);
+  g.position.set(-1.35, 0, -0.45);
+  return g;
+}
+
 const DESCS = {
   Cr: "Credenza Game 2000×450×1150 — 6 nichos (int. 573×351), 2 gavetões, CRT 570×480×360 na baia (piso reforçado) e LG 27″ sobre o tampo ao centro. Gire p/ trás: painel técnico removível c/ SCART 6×1, AV 6×1, HDMI 6×1, GBS-Control e régua. Lateral direita c/ recorte 70×980 da mureta.",
   Bi: "Biblioteca 1720×350×2400 — 2 vãos de 833 c/ 5 prateleiras reguláveis (vão 369), rodapé 60, fundo escuro. Fixação anti-tombamento na parede.",
   Ba: "Bancada Dev 2000×700×750* — tampo 25 mm, painéis laterais, travessa traseira, 2 furos passa-cabo ø60. *Conferir 750×800 antes do corte.",
-  Po: "Porta de correr INTERNA acústica — folha sanduíche 1000×2200×60 (2× MDF 15 + núcleo isolante, ~50 kg, kit ≥80 kg); corre atrás da biblioteca (afastada 110 da parede); batente c/ borracha magnética no fechamento, escovas no vão e drop seal na base."
+  Po: "Porta de correr INTERNA acústica — folha sanduíche 1000×2200×60 (2× MDF 15 + núcleo isolante, ~50 kg, kit ≥80 kg); corre atrás da biblioteca (afastada 110 da parede); batente c/ borracha magnética no fechamento, escovas no vão e drop seal na base.",
+  In: "INTEGRAÇÃO porta + biblioteca (parede SW fantasma c/ o vão 840×2160): biblioteca afastada 110 forma a cavidade-bolso; folha mostrada MEIO ABERTA, metade escondida atrás da biblioteca. Em VERMELHO: borracha magnética do batente (canto SE), escovas na boca da cavidade e drop seal na base. Trilho h≈2260 c/ tampão amadeirado sobre o vão; espaçadores anti-tombamento acima do trilho."
 };
-const builders = {Cr: credenza, Bi: biblioteca, Ba: bancada, Po: porta};
+const builders = {Cr: credenza, Bi: biblioteca, Ba: bancada, Po: porta, In: integracao};
 const CAM = {
   Cr: {pos:[2.4,1.5,2.6], tgt:[0,0.55,0]},
   Bi: {pos:[2.4,1.9,3.0], tgt:[0,1.15,0]},
   Ba: {pos:[2.3,1.5,2.6], tgt:[0,0.5,0]},
   Po: {pos:[2.0,1.6,2.8], tgt:[0,1.1,0]},
+  In: {pos:[2.2,2.0,3.6], tgt:[0,1.15,0]},
 };
 let current = null;
 function show(k){
@@ -1343,7 +1390,7 @@ function show(k){
   current = builders[k]();
   scene.add(current);
   document.getElementById('desc').textContent = DESCS[k];
-  ['bCr','bBi','bBa','bPo'].forEach(id=>document.getElementById(id).classList.toggle('on', id === 'b'+k));
+  ['bCr','bBi','bBa','bPo','bIn'].forEach(id=>document.getElementById(id).classList.toggle('on', id === 'b'+k));
   camera.position.set(...CAM[k].pos);
   controls.target.set(...CAM[k].tgt);
 }
@@ -1351,6 +1398,7 @@ document.getElementById('bCr').addEventListener('click', ()=>show('Cr'));
 document.getElementById('bBi').addEventListener('click', ()=>show('Bi'));
 document.getElementById('bBa').addEventListener('click', ()=>show('Ba'));
 document.getElementById('bPo').addEventListener('click', ()=>show('Po'));
+document.getElementById('bIn').addEventListener('click', ()=>show('In'));
 show('Cr');
 
 function animate(){
