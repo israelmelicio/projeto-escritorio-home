@@ -83,6 +83,26 @@ const M = {
   seal  : new THREE.MeshStandardMaterial({color:0xC8442C, roughness:0.6}),
   floor : new THREE.MeshStandardMaterial({color:0x241f19, roughness:0.95}),
 };
+// tela da CRT ligada: cena pixel-art genérica em canvas (autocontido)
+const crtCanvas = document.createElement('canvas');
+crtCanvas.width = 128; crtCanvas.height = 96;
+(function(ctx){
+  ctx.fillStyle = '#2a6fd6'; ctx.fillRect(0, 0, 128, 96);
+  ctx.fillStyle = '#8fd0ff'; ctx.fillRect(0, 0, 128, 28);
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(16, 14, 22, 7); ctx.fillRect(78, 8, 26, 8);
+  ctx.fillStyle = '#3f9e3f'; ctx.fillRect(0, 72, 128, 24);
+  ctx.fillStyle = '#2e7a2e'; for(let x=0; x<128; x+=8) ctx.fillRect(x, 72, 4, 4);
+  ctx.fillStyle = '#c8692e'; for(let x=0; x<128; x+=16) ctx.fillRect(x+2, 56, 12, 10);
+  ctx.fillStyle = '#ffd23e'; ctx.fillRect(66, 40, 10, 10);
+  ctx.fillStyle = '#d64545'; ctx.fillRect(28, 62, 8, 10);
+  ctx.fillStyle = '#ffe0bd'; ctx.fillRect(28, 58, 8, 5);
+  ctx.globalAlpha = 0.18; ctx.fillStyle = '#000';
+  for(let y=0; y<96; y+=2) ctx.fillRect(0, y, 128, 1);
+  ctx.globalAlpha = 1;
+})(crtCanvas.getContext('2d'));
+const crtTex = new THREE.CanvasTexture(crtCanvas);
+crtTex.magFilter = THREE.NearestFilter;
+M.crtOn = new THREE.MeshBasicMaterial({map: crtTex});
 
 function B(g, x, z, w, d, h, y0, mat){
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
@@ -149,9 +169,9 @@ function credenza(){
   B(g, 0.611, 0.45, 0.778, 0.018, 0.178, 0.227, M.wood);
   B(g, 0.93, 0.468, 0.14, 0.006, 0.008, 0.21, M.woodIn);       // cava gav 1
   B(g, 0.93, 0.468, 0.14, 0.006, 0.008, 0.392, M.woodIn);      // cava gav 2
-  // CRT na baia (570×480×360 — prof. útil 369, folga 9)
+  // CRT na baia (570×480×360 — prof. útil 369, folga 9), tela ligada
   B(g, 0.715, 0.08, 0.57, 0.36, 0.48, 0.423, M.device);
-  B(g, 0.76, 0.442, 0.48, 0.006, 0.36, 0.483, M.screen);
+  B(g, 0.76, 0.442, 0.48, 0.006, 0.36, 0.483, M.crtOn);
   // LG 27″ sobre o tampo, ao centro
   lg(g, 0.694, 1.15, 0.15);
   B(g, 0.12, 0.10, 0.092, 0.26, 0.39, 1.15, M.white);          // PS5

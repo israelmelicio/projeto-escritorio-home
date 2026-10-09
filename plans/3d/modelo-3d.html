@@ -1210,6 +1210,26 @@ const M = {
   plant : new THREE.MeshStandardMaterial({color:0x4a7a46, roughness:0.85}),
   pot   : new THREE.MeshStandardMaterial({color:0x8a4a30, roughness:0.8}),
 };
+// tela da CRT ligada: cena pixel-art genérica desenhada em canvas (artifact autocontido)
+const crtCanvas = document.createElement('canvas');
+crtCanvas.width = 128; crtCanvas.height = 96;
+(function(ctx){
+  ctx.fillStyle = '#2a6fd6'; ctx.fillRect(0, 0, 128, 96);
+  ctx.fillStyle = '#8fd0ff'; ctx.fillRect(0, 0, 128, 28);
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(16, 14, 22, 7); ctx.fillRect(78, 8, 26, 8);
+  ctx.fillStyle = '#3f9e3f'; ctx.fillRect(0, 72, 128, 24);
+  ctx.fillStyle = '#2e7a2e'; for(let x=0; x<128; x+=8) ctx.fillRect(x, 72, 4, 4);
+  ctx.fillStyle = '#c8692e'; for(let x=0; x<128; x+=16) ctx.fillRect(x+2, 56, 12, 10);
+  ctx.fillStyle = '#ffd23e'; ctx.fillRect(66, 40, 10, 10);
+  ctx.fillStyle = '#d64545'; ctx.fillRect(28, 62, 8, 10);
+  ctx.fillStyle = '#ffe0bd'; ctx.fillRect(28, 58, 8, 5);
+  ctx.globalAlpha = 0.18; ctx.fillStyle = '#000';
+  for(let y=0; y<96; y+=2) ctx.fillRect(0, y, 128, 1);
+  ctx.globalAlpha = 1;
+})(crtCanvas.getContext('2d'));
+const crtTex = new THREE.CanvasTexture(crtCanvas);
+crtTex.magFilter = THREE.NearestFilter;
+M.crtOn = new THREE.MeshBasicMaterial({map: crtTex});
 
 // box helper: corner (x,z), width along x, depth along z, height h, base y0
 function B(g, x, z, w, d, h, y0, mat){
@@ -1250,9 +1270,9 @@ function nichePlate(g, x, y0, w, h, z){ // dark plate on a +z-facing front
 function nichePlateX(g, z, y0, d, h, x){ // dark plate on a +x-facing front
   B(g, x, z, 0.004, d, h, y0, M.voidDk);
 }
-function crt(g, x){ // CRT on display surface, front toward +z
+function crt(g, x){ // CRT on display surface, front toward +z, tela ligada
   B(g, x, 0.06, 0.57, 0.36, 0.48, 0.52, M.device);
-  B(g, x+0.045, 0.418, 0.48, 0.006, 0.36, 0.585, M.screen);
+  B(g, x+0.045, 0.418, 0.48, 0.006, 0.36, 0.585, M.crtOn);
 }
 function lgMonitor(g, x, y0, z){ // LG 27" on stand
   B(g, x+0.19, z, 0.24, 0.16, 0.02, y0, M.black);
@@ -1432,8 +1452,8 @@ function optionE(){
   B(g, 1.395, 0.451, 0.76, 0.004, 0.19, 0.08, M.woodDk);   // gavetão 1 (controles)
   B(g, 1.395, 0.451, 0.76, 0.004, 0.19, 0.30, M.woodDk);   // gavetão 2 (acessórios)
   nichePlate(g, 1.395, 0.54, 0.76, 0.57, 0.451);           // baia da CRT (recesso)
-  B(g, 1.49, 0.06, 0.57, 0.36, 0.48, 0.54, M.device);      // CRT na baia
-  B(g, 1.535, 0.421, 0.48, 0.006, 0.36, 0.60, M.screen);
+  B(g, 1.49, 0.06, 0.57, 0.36, 0.48, 0.54, M.device);      // CRT na baia, tela ligada
+  B(g, 1.535, 0.421, 0.48, 0.006, 0.36, 0.60, M.crtOn);
   lgMonitor(g, 1.47, 1.15, 0.12);                          // LG sobre o tampo, ao centro
   B(g, 0.90, 0.10, 0.092, 0.26, 0.39, 1.15, M.white);      // PS5 vertical no topo
   B(g, 1.13, 0.12, 0.15, 0.15, 0.30, 1.15, M.black);       // Series X
