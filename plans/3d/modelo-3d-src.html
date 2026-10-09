@@ -96,6 +96,8 @@ const M = {
   leath : new THREE.MeshStandardMaterial({color:0x3e1f0d, roughness:0.72}),
   slate : new THREE.MeshStandardMaterial({color:0x39434f, roughness:0.7}),
   fendi : new THREE.MeshStandardMaterial({color:0x7d7568, roughness:0.6}),
+  plant : new THREE.MeshStandardMaterial({color:0x4a7a46, roughness:0.85}),
+  pot   : new THREE.MeshStandardMaterial({color:0x8a4a30, roughness:0.8}),
 };
 
 // box helper: corner (x,z), width along x, depth along z, height h, base y0
@@ -343,7 +345,15 @@ function optionE(){
   B(g, 0.85, 1.79, 1.27, 0.91, 0.43, 0, M.navy);
   B(g, 0.85, 2.44, 1.27, 0.26, 0.39, 0.43, M.navy);
   B(g, 0.89, 1.84, 1.19, 0.56, 0.09, 0.43, M.navyLt);
-  // porta de correr: trilho pelo corredor — sem giro dentro da sala (ver folha 07)
+  // planta em vaso no canto da janela (entre a bancada e a mureta)
+  const vaso = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.35, 16), M.pot);
+  vaso.position.set(3.18, 0.175, 0.33); vaso.castShadow = vaso.receiveShadow = true; g.add(vaso);
+  const tronco = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.028, 0.5, 8), M.woodDk);
+  tronco.position.set(3.18, 0.60, 0.33); tronco.castShadow = true; g.add(tronco);
+  [[3.18,1.04,0.33,0.26],[3.07,0.88,0.40,0.17],[3.29,0.92,0.26,0.16]].forEach(s=>{
+    const f = new THREE.Mesh(new THREE.SphereGeometry(s[3], 14, 10), M.plant);
+    f.position.set(s[0], s[1], s[2]); f.castShadow = true; g.add(f);
+  });
   return g;
 }
 
