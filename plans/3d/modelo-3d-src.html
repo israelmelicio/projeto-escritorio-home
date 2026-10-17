@@ -352,6 +352,9 @@ function optionE(){
   for(let r=0;r<6;r++) nichePlateX(g, 0.04, 0.20+r*0.36, 1.64, 0.30, 0.461);
   // folha da porta de correr interna (fechada sobre o vão; abre p/ trás da biblioteca)
   B(g, 0.025, 1.66, 0.06, 1.00, 2.20, 0, M.wood);
+  // fechamento do bolso: painel na extremidade do canto NW + tampa superior da cavidade
+  B(g, 0, 0, 0.11, 0.018, 2.40, 0, M.wood);
+  B(g, 0, 0.018, 0.11, 1.702, 0.018, 2.382, M.wood);
   // bancada dev encurtada (200×70) — canto da janela livre
   B(g, 2.85, 0.70, 0.70, 2.00, 0.04, 0.72, M.darkTop);
   B(g, 2.88, 0.72, 0.64, 0.04, 0.72, 0, M.darkTop);
